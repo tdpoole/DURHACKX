@@ -5,11 +5,13 @@ from settings import *
 from main import *
 
 class FallingSeed:
-    def __init__(self, x, y, assets:AssetManager):
+    def __init__(self, x, y, assets:AssetManager, parentTree, index):
         self.rect = pygame.Rect(x,y,10,10)
         self.surf = assets.seed
         self.assets = assets
         self.attachedToTree = True
+        self.parent = parentTree
+        self.index = index
 
     def update(self, game):
         if not self.attachedToTree:
@@ -26,3 +28,4 @@ class FallingSeed:
 
     def plant(self, game):
         game.trees.append(Tree(self.rect.x,self.rext.y,self.assets))
+        self.parent.seeds.pop(self.index)
