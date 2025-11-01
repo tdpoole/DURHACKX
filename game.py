@@ -5,7 +5,7 @@ from random import randint
 
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
-from gamecls.menubar import menuBar
+from gamecls.menubar import MenuBar
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
 from plrinput import Input
@@ -20,10 +20,11 @@ class Game:
         self.particles = []
         self.backgroundDarkness = 1
 
-        self.menuBar = menuBar(0, assets)
+        self.menuBar = MenuBar(0, assets)
         self.season = 1
-        self.ground = Ground(10, GROUND_Y_LEVEL, assets)
-        self.winterground = WinterGround(10, GROUND_Y_LEVEL, assets)
+        self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
+        self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
+        self.year = 1
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
@@ -38,7 +39,7 @@ class Game:
     def update(self, player_input: Input):
         self.precipitation.update(self)
         self.menuBar.axe.update(player_input)
-        
+
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1
 
@@ -59,25 +60,25 @@ class Game:
             self.camerax += 10
 
     def draw(self, screen):
-        Winter = False
         if self.precipitation.precipitating:
             targetDarkness = 0.5
         else:
             targetDarkness = 1
-        if self.season % 2 == 0: # Seasons 2, 4, 6...
-            Winter = True
-            targetDarkness -= 0.3
+        if self.season == 2:
+            targetDarkness -= 0.2
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
+
+
         
-        if Winter == False: # Summer
+        if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
-            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.ground.rect.width)):
-                screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
+                screen.blit(self.SummerGround.surface, (groundpos*self.SummerGround.rect.width - self.camerax, self.SummerGround.globaly - self.cameray, self.SummerGround.rect.width, self.SummerGround.rect.height))
         else:
             self.precipitation.isSnow = True
-            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.winterground.rect.width)):
-                screen.blit(self.winterground.surface, (groundpos*self.winterground.rect.width - self.camerax, self.winterground.globaly - self.cameray, self.winterground.rect.width, self.winterground.rect.height))
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.WinterGround.rect.width)):
+                screen.blit(self.WinterGround.surface, (groundpos*self.WinterGround.rect.width - self.camerax, self.WinterGround.globaly - self.cameray, self.WinterGround.rect.width, self.WinterGround.rect.height))
         
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
