@@ -6,10 +6,10 @@ from gamecls.axe import Axe
 from gamecls.wateringcan import WateringCan
 
 class menuBar():
-    def __init__(self, gwValue, assets, selected):
+    def __init__(self, gwValue, assets):
         self.gwValue = gwValue
-        self.axe = Axe(assets, selected)
-        self.wateringcan = WateringCan(assets, selected)
+        self.axe = Axe(assets)
+        self.wateringcan = WateringCan(assets)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))

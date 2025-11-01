@@ -22,7 +22,7 @@ class Game:
         self.backgroundDarkness = 1
 
         self.selected = ""
-        self.menuBar = menuBar(0, assets,self.selected)
+        self.menuBar = menuBar(0, assets)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
@@ -41,8 +41,8 @@ class Game:
     def update(self, player_input: Input):
         self.healthBars=[]
         self.precipitation.update(self)
-        self.menuBar.axe.update(player_input, self.selected)
-        self.menuBar.wateringcan.update(player_input, self.selected)
+        self.selected = self.menuBar.axe.update(player_input, self.selected)
+        self.selected = self.menuBar.wateringcan.update(player_input, self.selected)
 
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1
@@ -96,8 +96,10 @@ class Game:
 
         self.menuBar.show(screen)
 
-        if self.menuBar.axe.selected:
+        if self.selected == "Axe":
             screen.blit(self.menuBar.axe.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))
+        elif self.selected == "Can":
+            screen.blit(self.menuBar.wateringcan.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))            
 
     def createTree(self, x, y):
         return Tree(x, y, self.assets)

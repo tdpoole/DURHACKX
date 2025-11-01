@@ -8,16 +8,17 @@ class WateringCan:
     def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.surface = assets.wateringcan
-        self.selected = False
         self.sinceSelected = 0
 
-    def update(self, player_input: Input):
+    def update(self, player_input: Input, selected):
         if self.sinceSelected > 30:
-            if player_input.mouse_pressed[0] and (110,12)<player_input.mouse_pos<(190,42) and not self.selected:
-                self.selected = True
-                self.sinceSelected = 0
-            elif player_input.mouse_pressed[0] and (110,12)<player_input.mouse_pos<(190,42) and self.selected:
-                self.selected = False
-                self.sinceSelected = 0
+            if player_input.mouse_pressed[0] and (110,12) < player_input.mouse_pos < (190,42):
+                if selected == "" or selected == "Axe":
+                    selected = "Can"
+                    self.sinceSelected = 0
+                elif selected == "Can":
+                    selected == ""
+                    self.sinceSelected = 0
         else:
             self.sinceSelected += 1
+        return selected
