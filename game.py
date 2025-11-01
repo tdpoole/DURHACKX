@@ -29,6 +29,8 @@ class Game:
 
         for particle in self.particles:
             particle.update(self)
+            if particle.killme:
+                self.particles.remove(particle)
 
         if player_input.mouse_pos[0] < 100:
             self.camerax -= 10
