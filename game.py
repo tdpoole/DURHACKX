@@ -1,6 +1,7 @@
 import pygame
 import plrinput
 from gamecls.tree import Tree
+from gamecls.fallingseed import FallingSeed
 from plrinput import Input
 from settings import SCREEN_WIDTH
 
@@ -19,6 +20,8 @@ class Game:
 
         self.camerax = 0
         self.cameray = 0
+
+        self.assets = assets
 
     def update(self, player_input: Input):
         for tree in self.trees:
@@ -47,3 +50,9 @@ class Game:
 
         for particle in self.particles:
             particle.draw(screen)
+
+    def createTree(self, x, y):
+        return Tree(x, y, self.assets)
+    
+    def createSeed(self, x, y):
+        return FallingSeed(x, y, self.assets)

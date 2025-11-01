@@ -1,7 +1,6 @@
 import pygame
 import assetmanager
 from random import randint
-from gamecls.fallingseed import FallingSeed
 from worldobject import WorldObject
 from settings import *
 
@@ -35,5 +34,5 @@ class Tree (WorldObject):
 
         if self.fullyGrown:
             if randint(0,100) == 0:
-                game.seeds.append(FallingSeed(self.globalx+randint(-50,50),self.globaly+randint(-50,50),self.assetref))
+                game.seeds.append(game.createSeed(self.globalx+randint(-50,50),self.globaly+randint(0,10)))
                 print("Gen Seed")
