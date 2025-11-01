@@ -1,25 +1,21 @@
 import pygame
 from assetmanager import AssetManager
 from random import randint
-from settings import *
-from main import *
+from worldobject import WorldObject
 
-class FallingSeed:
-    def __init__(self, x, y, assets:AssetManager, parentTree, index):
+class FallingSeed(WorldObject):
+    def __init__(self, x, y, assets: AssetManager, parentTree, index):
         self.rect = pygame.Rect(x,y,10,10)
-        self.surf = assets.seed
-        self.assets = assets
         self.attachedToTree = True
+        super().__init__(x, y, assets.seed)
         self.parent = parentTree
         self.index = index
 
     def update(self, game):
         if not self.attachedToTree:
-            self.rect.y += 3
-            self.rect.x += randint(-1,1)
-            if self.rect.y == GROUND_Y_LEVEL:
-                self.plant(game)
-        else:
+            self.rect.y += 1
+
+        if self.attachedToTree:
             if randint(0,1000)==0:
                 self.attachedToTree = False
 
