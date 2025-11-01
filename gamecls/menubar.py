@@ -21,8 +21,8 @@ class menuBar():
         textRect = text.get_rect()
         screen.blit(text, textRect, (-SCREEN_WIDTH+300,-22,10000,10000))
         # adding axe icon
-        screen.blit(self.axe.surface, (20,12))
+        screen.blit(self.axe.surface, self.axe.rect)
         # etc
-        screen.blit(self.wateringcan.surface, (110,12))
+        screen.blit(self.wateringcan.surface, self.wateringcan.rect)
         # adding water tank icon
         self.watertank.show(screen)
