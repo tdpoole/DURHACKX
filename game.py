@@ -18,6 +18,7 @@ class Game:
         self.trees = []
         self.seeds = []
         self.particles = []
+        self.healthBars = []
         self.backgroundDarkness = 1
 
         self.menuBar = MenuBar(0, assets)
@@ -37,6 +38,7 @@ class Game:
         self.assets = assets
 
     def update(self, player_input: Input):
+        self.healthBars=[]
         self.precipitation.update(self)
         self.menuBar.axe.update(player_input)
 
@@ -44,7 +46,7 @@ class Game:
             self.menuBar.gwValue += 1
 
         for tree in self.trees:
-            tree.update(self)
+            tree.update(self, Input)
 
         for seed in self.seeds:
             seed.update(self)
@@ -86,6 +88,9 @@ class Game:
 
         for particle in self.particles:
             screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
+
+        for bar in self.healthBars:
+            bar.draw(screen)
 
         self.menuBar.show(screen)
 
