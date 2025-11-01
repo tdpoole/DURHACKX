@@ -1,11 +1,8 @@
 import pygame
 import plrinput
 from gamecls.tree import Tree
-<<<<<<< Updated upstream
 from gamecls.fallingseed import FallingSeed
-=======
 from gamecls.ground import Ground
->>>>>>> Stashed changes
 from plrinput import Input
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from assetmanager import AssetManager

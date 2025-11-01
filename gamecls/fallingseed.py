@@ -13,12 +13,8 @@ class FallingSeed(WorldObject):
     def update(self, game):
         if not self.attachedToTree:
             self.globaly += 1
-<<<<<<< Updated upstream
             self.globalx += 2
-            if self.globaly >= GROUND_Y_LEVEL:
-=======
             if self.globaly >= GROUND_Y_LEVEL - 140:
->>>>>>> Stashed changes
                 game.seeds.remove(self)
                 game.trees.append(game.createTree(self.globalx, self.globaly-200))
 
