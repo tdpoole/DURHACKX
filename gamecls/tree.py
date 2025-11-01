@@ -10,10 +10,12 @@ class Tree:
 
         self.growthSurfs = []
 
+        self.timeAlive = 0
+
         self.growthSurfs.append(assets.treeGrowth0)
 
     def update(self):
-        pass
+        self.timeAlive += 1
 
     def draw(self, screen:pygame.Surface):
         screen.blit(self.growthSurfs[self.growthStage], self.rect)
