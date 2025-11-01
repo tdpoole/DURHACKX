@@ -37,8 +37,6 @@ class Game:
         self.camerax = SCREEN_WIDTH*5/4
         self.cameray = 0
 
-        self.assets = assets
-
     def update(self, player_input: Input):
         self.healthBars=[]
         self.precipitation.update(self)
