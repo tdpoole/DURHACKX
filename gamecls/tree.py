@@ -29,7 +29,7 @@ class Tree (WorldObject):
         self.growthSurfs.append(assets.treeGrowth4)
         self.fullygrownsurf = assets.fulltreeGrowth
 
-        super().__init__(x, y, self.fullygrownsurf)
+        super().__init__(x, y, assets.treeGrowth0)
 
 
     def update(self, game):
