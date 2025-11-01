@@ -39,7 +39,7 @@ class PrecipitationManager:
             self.precipitating = not self.precipitating
 
 
-        # Update particals
+        # Update particles
         if self.precipitating:
             for i in range(self.weight):
                 if self.isSnow:
