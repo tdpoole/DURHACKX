@@ -7,7 +7,7 @@ def import_image(imgpath, scale=1):
 class AssetManager:
     def __init__(self):
         self.seed = import_image('assets/Images/seed.png')
-        self.summerground = import_image('assets/Images/ground.png')
+        self.ground = import_image('assets/Images/ground.png')
         self.winterground = import_image('assets/Images/winterground.png')
 
         self.treeGrowth0 = import_image('assets/Images/treephase1.png')
@@ -20,7 +20,5 @@ class AssetManager:
         self.snowParticle = import_image('assets/Images/snowParticle.png', 0.5)
 
         self.fulltreeGrowth = import_image('assets/Images/treephase4.png')
-
-        self.background = import_image('assets/Images/Background.png')
 
         self.axe = import_image('assets/Images/Axe.png', 0.3)
