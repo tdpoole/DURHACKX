@@ -13,7 +13,8 @@ class FallingSeed(WorldObject):
     def update(self, game):
         if not self.attachedToTree:
             self.globaly += 1
-            self.globalx += 2
+            if 0<self.globalx<SCREEN_WIDTH*4:
+                self.globalx += 2
             if self.globaly >= GROUND_Y_LEVEL:
                 game.seeds.remove(self)
                 game.trees.append(game.createTree(self.globalx, self.globaly-200))

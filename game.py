@@ -35,9 +35,9 @@ class Game:
             if particle.killme:
                 self.particles.remove(particle)
 
-        if player_input.mouse_pos[0] < 100:
+        if player_input.mouse_pos[0] < 100 and self.camerax > 0:
             self.camerax -= 10
-        if player_input.mouse_pos[0] > SCREEN_WIDTH-100:
+        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH:
             self.camerax += 10
 
     def draw(self, screen):
