@@ -22,6 +22,7 @@ class Game:
         self.backgroundDarkness = 1
 
         self.menuBar = menuBar(0, assets)
+        self.selected = ""
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
@@ -40,8 +41,8 @@ class Game:
     def update(self, player_input: Input):
         self.healthBars=[]
         self.precipitation.update(self)
-        self.menuBar.axe.update(player_input)
-        self.menuBar.wateringcan.update(player_input)
+        self.menuBar.axe.update(player_input, self.selected)
+        self.menuBar.wateringcan.update(player_input, self.selected)
 
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1
