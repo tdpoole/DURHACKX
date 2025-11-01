@@ -1,6 +1,7 @@
 import pygame
 import settings
 import plrinput
+from assetmanager import AssetManager
 from game import *
 
 def main():
@@ -12,8 +13,9 @@ def main():
     running = True
 
     state = "game"
+    assets = AssetManager()
 
-    game = Game()
+    game = Game(assets)
 
     player_input = plrinput.Input()
 
