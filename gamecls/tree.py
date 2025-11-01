@@ -58,6 +58,15 @@ class Tree (WorldObject):
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
             self.mouseHovered = True
             game.healthBars.append(HealthBar(self.health/self.maxhealth,self.rect.x,self.rect.y+self.rect.height+10,self.rect.width, 20))
+
+            if input.mouse_pressed[0]:
+                if game.selected == "Can":
+                    self.health += 100
+                    if self.health > self.maxhealth:
+                        self.health = self.maxhealth
+                    self.isWatered = True
+                elif game.selected == "Axe":
+                    self.health -= 300
         else:
             self.mouseHovered = False
 
