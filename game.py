@@ -1,6 +1,8 @@
 import pygame
 import plrinput
 from gamecls.tree import Tree
+from plrinput import Input
+from settings import SCREEN_WIDTH
 
 
 class Game:
@@ -11,15 +13,21 @@ class Game:
 
         # Game state properties
         self.isRaining = False
-        self.season = "summer"
         self.wind = 0
 
-    def update(self, player_input):
+        self.camerax = 0
+        self.cameray = 0
+
+    def update(self, player_input: Input):
         for tree in self.trees:
-            tree.update()
+            tree.update(self)
+
+        if player_input.mouse_pos[0] < 100:
+            self.camerax -= 10
+        if player_input.mouse_pos[0] > SCREEN_WIDTH-100:
+            self.camerax += 10
 
     def draw(self, screen):
 
-
         for tree in self.trees:
-            tree.draw(screen)
+            screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
