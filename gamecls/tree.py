@@ -25,17 +25,15 @@ class Tree (WorldObject):
 
         super().__init__(x, y, self.fullygrownsurf)
 
-        self.seeds = []
 
     def update(self, game):
         self.timeAlive += 1
 
-        self.surface = self.growthSurfs[self.growthStage]
+        if not self.fullyGrown:
+            self.surface = self.growthSurfs[self.growthStage]
 
-        for seed in self.seeds:
-            seed.update()
 
         if self.fullyGrown:
-            if randint(0,1000) == 0:
-                self.seeds.append(FallingSeed(self.rect.centerx+randint(-50,50),self.rect.centery+randint(-50,50),self.assetref))
+            if randint(0,100) == 0:
+                game.seeds.append(FallingSeed(self.globalx+randint(-50,50),self.globaly+randint(-50,50),self.assetref,self,len(self.seeds)))
                 print("Gen Seed")

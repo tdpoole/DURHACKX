@@ -6,12 +6,12 @@ def import_image(imgpath):
 
 class AssetManager:
     def __init__(self):
-        self.seed = import_image('assets/placeholder.svg')
+        self.seed = import_image('assets/Images/seed.png')
 
-        self.treeGrowth1 = import_image('assets/placeholder.svg')
-        self.treeGrowth2 = import_image('assets/placeholder.svg')
-        self.treeGrowth0 = import_image('assets/placeholder.svg')
-        self.treeGrowth3 = import_image('assets/placeholder.svg')
-        self.treeGrowth4 = import_image('assets/placeholder.svg')
+        self.treeGrowth0 = import_image('assets/Images/treephase1.png')
+        self.treeGrowth1 = import_image('assets/Images/treephase2.png')
+        self.treeGrowth2 = import_image('assets/Images/treephase3.png')
+        self.treeGrowth3 = import_image('assets/Images/treephase4.png')
+        self.treeGrowth4 = import_image('assets/Images/treephase1.png')
 
         self.fulltreeGrowth = import_image('assets/Images/FullTree.png')
