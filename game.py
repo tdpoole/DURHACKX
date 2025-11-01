@@ -37,6 +37,8 @@ class Game:
 
     def update(self, player_input: Input):
         self.precipitation.update(self)
+        self.menuBar.axe.update(player_input)
+        
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1
 
@@ -51,9 +53,9 @@ class Game:
             if particle.killme:
                 self.particles.remove(particle)
 
-        if player_input.mouse_pos[0] < 100 and self.camerax > 0:
+        if player_input.mouse_pos[0] < 100 and self.camerax > 0 and player_input.mouse_pos[1]>80:
             self.camerax -= 10
-        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5:
+        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5 and player_input.mouse_pos[1]>80:
             self.camerax += 10
 
     def draw(self, screen):

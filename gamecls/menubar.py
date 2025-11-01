@@ -10,7 +10,7 @@ class delTree():
         self.surface = assets.axe
 
     def update(self, player_input: Input):
-        if player_input.mouse_pressed == True:
+        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(60,42):
           print("Axe been pressed")
 
 class menuBar():

@@ -6,5 +6,5 @@ class Input:
         self.mouse_pos = pygame.mouse.get_pos()
 
     def update(self):
-        self.mouse_pressed=pygame.mouse.get_pressed()[0]
+        self.mouse_pressed=pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
