@@ -3,6 +3,7 @@ import plrinput
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
 from gamecls.ground import Ground
+from gamecls.menubar import menuBar
 from plrinput import Input
 from gamecls.precipitation import PrecipitationManager
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -14,6 +15,8 @@ class Game:
         self.seeds = []
         self.particles = []
         self.ground = Ground(10,SCREEN_HEIGHT-140,assets)
+        self.globalWarming = 0
+        self.menuBar = menuBar(self.globalWarming)
 
         self.assets = assets
         self.trees.append(Tree(360,400,assets))
@@ -48,6 +51,8 @@ class Game:
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
         screen.blit(self.ground.surface, (self.ground.globalx - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
+
+        self.menuBar.show(screen)
 
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
