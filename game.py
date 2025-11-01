@@ -18,7 +18,7 @@ class Game:
         self.ground = Ground(10,SCREEN_HEIGHT-140,assets)
 
         self.assets = assets
-        self.trees.append(Tree(360,400,assets))
+        self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
 
         self.precipitation = PrecipitationManager()
 
