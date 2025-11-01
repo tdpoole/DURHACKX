@@ -43,7 +43,7 @@ class Tree (WorldObject):
                 if randint(0,500) == 0:
                     self.isWatered = False
                     self.growthStage+=1
-                    self.maxhealth = (600 + (200*self.growthStage))
+                    self.maxhealth = (600 + (300*self.growthStage))
                     if self.growthStage >= len(self.growthSurfs):
                         self.fullyGrown = True
                         self.surface = self.fullygrownsurf
@@ -58,9 +58,27 @@ class Tree (WorldObject):
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
             self.mouseHovered = True
             game.healthBars.append(HealthBar(self.health/self.maxhealth,self.rect.x,self.rect.y+self.rect.height+10,self.rect.width, 20))
+
+            if input.mouse_pressed[0]:
+                if game.selected == "Can":
+                    self.health += 100
+                    if self.health > self.maxhealth:
+                        self.health = self.maxhealth
+                    self.isWatered = True
+                elif game.selected == "Axe" and self.fullyGrown:
+                    self.health -= 1000
+                    game.currency.amount+=100
         else:
             self.mouseHovered = False
 
         if self.fullyGrown:
             if randint(0,500) == 0:
                 game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
+
+        # Life drains quicker if close to other trees
+        for othertree in game.trees:
+            if othertree == self: continue
+            xpos = othertree.globalx
+            horizDiff = self.globalx - xpos
+            if horizDiff < 0: horizDiff = -horizDiff
+            self.health -= 200/horizDiff

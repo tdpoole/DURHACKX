@@ -1,17 +1,15 @@
-import pygame
-import plrinput
 import math
 from random import randint
 
-from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
-from gamecls.menubar import menuBar
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
-from plrinput import Input
+from gamecls.menubar import menuBar
 from gamecls.precipitation import PrecipitationManager
+from gamecls.tree import Tree
+from plrinput import Input
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
-from assetmanager import AssetManager
+from gamecls.currency import Currency
 
 class Game:
     def __init__(self, assets):
@@ -32,6 +30,9 @@ class Game:
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
 
         self.precipitation = PrecipitationManager()
+        self.camerax = SCREEN_WIDTH * 5 / 4
+        self.cameray = 0
+        self.currency = Currency()
 
         self.camerax = SCREEN_WIDTH*5/4
         self.cameray = 0
@@ -50,6 +51,7 @@ class Game:
             tree.update(self, player_input)
             if tree.health<1:
                 self.trees.remove(tree)
+        self.currency.update(self.trees)
 
         for seed in self.seeds:
             seed.update(self)
@@ -96,6 +98,7 @@ class Game:
             bar.draw(screen)
 
         self.menuBar.show(screen)
+        self.currency.draw(screen)
 
         if self.selected == "Axe":
             screen.blit(self.menuBar.axe.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))
