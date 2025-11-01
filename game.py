@@ -46,7 +46,7 @@ class Game:
             self.menuBar.gwValue += 1
 
         for tree in self.trees:
-            tree.update(self, Input)
+            tree.update(self, player_input)
 
         for seed in self.seeds:
             seed.update(self)
