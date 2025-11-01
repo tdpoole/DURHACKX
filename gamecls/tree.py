@@ -51,9 +51,9 @@ class Tree (WorldObject):
         self.growthStage=max(0, min(self.growthStage, len(self.growthSurfs)-1))
 
         self.health-=1
-        print(self.rect)
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
             self.mouseHovered = True
+            game.healthBars.append(HealthBar(self.health/self.maxhealth,self.rect.x,self.rect.y+self.rect.height+10,self.rect.width, 20))
         else:
             self.mouseHovered = False
 
