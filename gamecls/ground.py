@@ -6,6 +6,10 @@ from random import randint
 from worldobject import WorldObject
 from settings import *
 
-class Ground(WorldObject):
+class SummerGround(WorldObject):
     def __init__(self, x, y, assets: AssetManager):
-        super().__init__(x, y, assets.ground)
+        super().__init__(x, y, assets.summerground)
+
+class WinterGround(WorldObject):
+    def __init__(self, x, y, assets: AssetManager):
+        super().__init__(x, y, assets.winterground)

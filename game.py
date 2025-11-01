@@ -4,8 +4,9 @@ import math
 
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
-from gamecls.ground import Ground
 from gamecls.menubar import menuBar
+from gamecls.ground import SummerGround
+from gamecls.ground import WinterGround
 from plrinput import Input
 from gamecls.precipitation import PrecipitationManager
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
@@ -19,6 +20,9 @@ class Game:
         self.ground = Ground(10, GROUND_Y_LEVEL, assets)
         self.globalWarming = 0
         self.menuBar = menuBar(self.globalWarming)
+        self.season = 1
+        self.SummerGround = SummerGround(10, GROUND_Y_LEVEL, assets)
+        self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
 
         self.assets = assets
         self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
@@ -57,6 +61,17 @@ class Game:
         for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
             screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
 
+        if self.season % 2 == 1: # Summer
+            self.precipitation.precipitating = False
+            self.precipitation.isSnow = False
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.SummerGround.rect.width)):
+                screen.blit(self.SummerGround.surface, (groundpos*self.SummerGround.rect.width - self.camerax, self.SummerGround.globaly - self.cameray, self.SummerGround.rect.width, self.SummerGround.rect.height))
+        else:
+            self.precipitation.precipitating = True
+            self.precipitation.isSnow = True
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.WinterGround.rect.width)):
+                screen.blit(self.WinterGround.surface, (groundpos*self.WinterGround.rect.width - self.camerax, self.WinterGround.globaly - self.cameray, self.WinterGround.rect.width, self.WinterGround.rect.height))
+        
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
 
