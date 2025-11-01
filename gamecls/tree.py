@@ -65,8 +65,9 @@ class Tree (WorldObject):
                     if self.health > self.maxhealth:
                         self.health = self.maxhealth
                     self.isWatered = True
-                elif game.selected == "Axe":
-                    self.health -= 300
+                elif game.selected == "Axe" and self.fullyGrown:
+                    self.health -= 1000
+                    game.currency.amount+=100
         else:
             self.mouseHovered = False
 
