@@ -41,12 +41,13 @@ class Game:
         self.healthBars=[]
         self.precipitation.update(self)
         self.menuBar.axe.update(player_input)
+        self.menuBar.wateringcan.update(player_input)
 
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1
 
         for tree in self.trees:
-            tree.update(self, player_input)
+            tree.update(self)
 
         for seed in self.seeds:
             seed.update(self)
