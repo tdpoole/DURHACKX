@@ -21,8 +21,8 @@ class Game:
         self.healthBars = []
         self.backgroundDarkness = 1
 
-        self.menuBar = menuBar(0, assets)
         self.selected = ""
+        self.menuBar = menuBar(0, assets,self.selected)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
