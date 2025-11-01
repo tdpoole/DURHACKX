@@ -12,7 +12,7 @@ class Game:
         self.seeds = []
         self.particles = []
 
-        self.trees.append(Tree(36,64,assets))
+        self.trees.append(Tree(360,400,assets))
 
         # Game state properties
         self.isRaining = False

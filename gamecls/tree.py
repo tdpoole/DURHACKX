@@ -34,5 +34,5 @@ class Tree (WorldObject):
 
         if self.fullyGrown:
             if randint(0,1000) == 0:
-                game.seeds.append(game.createSeed(self.globalx+randint(-50,50),self.globaly+randint(0,10)))
+                game.seeds.append(game.createSeed(self.globalx+randint(-150,150),self.globaly+randint(0,40)))
                 print("Gen Seed")
