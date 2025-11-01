@@ -10,13 +10,23 @@ class delTree():
         self.surface = assets.axe
 
     def update(self, player_input: Input):
-        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(60,42):
+        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(100,72):
           print("Axe been pressed")
+
+class wateringCan():
+    def __init__(self, assets: assetmanager.AssetManager):
+        self.assetref = assets
+        self.surface = assets.wateringcan
+
+    def update(self, player_input: Input):
+        if player_input.mouse_pressed[0] and (110,12) < player_input.mouse_pos < (190,64):
+            print("watering can")
 
 class menuBar():
     def __init__(self, gwValue, assets):
         self.gwValue = gwValue
         self.axe = delTree(assets)
+        self.wateringcan = wateringCan(assets)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
@@ -27,3 +37,5 @@ class menuBar():
         screen.blit(text, textRect, (-SCREEN_WIDTH+300,-22,10000,10000))
         # adding axe icon
         screen.blit(self.axe.surface, (20,12))
+        # etc
+        screen.blit(self.wateringcan.surface, (110,12))
