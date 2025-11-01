@@ -9,10 +9,11 @@ class WaterTank:
         self.surface = assets.watertank
         self.size = size
         self.mouseHovered = False
+        self.rect = self.surface.get_rect(x=200,y=12)
         self.infoBaseRect = pygame.rect.Rect(200, 12, 100, 50)
 
     def update(self, player_input: Input):
-        if (200,12) < player_input.mouse_pos < (280,42):
+        if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
             if player_input.mouse_pressed[0]:
                 self.upgrade()
@@ -23,6 +24,6 @@ class WaterTank:
         print("upgrade tried")
 
     def show(self, screen):
-        screen.blit(self.surface, (200,12))
+        screen.blit(self.surface, self.rect)
         if self.mouseHovered:
             pygame.draw.rect(screen, (255,0,0), self.infoBaseRect)
