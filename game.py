@@ -9,8 +9,14 @@ class Game:
 
         self.trees.append(Tree(10,10,assets))
 
+        # Game state properties
+        self.isRaining = False
+        self.season = "summer"
+        self.wind = 0
+
     def update(self, player_input):
-        pass
+        for tree in self.trees:
+            tree.update()
 
     def draw(self, screen):
 
