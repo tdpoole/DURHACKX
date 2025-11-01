@@ -2,6 +2,8 @@ import pygame
 from assetmanager import AssetManager
 from random import randint
 from worldobject import WorldObject
+from settings import *
+from gamecls.tree import *
 
 class FallingSeed(WorldObject):
     def __init__(self, x, y, assets: AssetManager):
@@ -12,6 +14,10 @@ class FallingSeed(WorldObject):
     def update(self, game):
         if not self.attachedToTree:
             self.globaly += 1
+            if self.globaly >= GROUND_Y_LEVEL:
+                game.seeds.remove(self)
+                game.trees.append(Tree(self.globalx, self.globaly, game.assets))
+
         if self.attachedToTree:
             if randint(0,100)==0:
                 self.attachedToTree = False
