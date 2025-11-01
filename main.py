@@ -1,6 +1,8 @@
 import pygame
-from settings import *
+import math
 import plrinput
+
+from settings import *
 from assetmanager import AssetManager
 from game import *
 
@@ -19,6 +21,8 @@ def main():
 
     player_input = plrinput.Input()
 
+    start_ticks = pygame.time.get_ticks()
+
     while running:
 
         # Events
@@ -36,6 +40,8 @@ def main():
 
         clock.tick(FRAMERATE)
 
+        seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
+        game.season = 1 + math.floor(seconds_passed / 10)
     pygame.quit()
 
 if __name__ == "__main__":
