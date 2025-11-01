@@ -18,6 +18,7 @@ class Game:
         self.trees = []
         self.seeds = []
         self.particles = []
+        self.backgroundDarkness = 1
 
         self.menuBar = menuBar(0)
         self.season = 1
@@ -56,7 +57,16 @@ class Game:
             self.camerax += 10
 
     def draw(self, screen):
-        screen.blit(self.assets.background, (0-self.camerax,self.cameray))
+        if self.precipitation.precipitating:
+            targetDarkness = 0.5
+        else:
+            targetDarkness = 1
+        if self.season == 2:
+            targetDarkness -= 0.2
+        self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
+        print(self.backgroundDarkness)
+        screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
+
 
         
         if self.season % 2 == 1: # Summer
