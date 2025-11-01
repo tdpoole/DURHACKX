@@ -25,13 +25,24 @@ class PrecipitationManager:
         self.isSnow = False
         self.weight = 1 # Bigger gives heavier rain/snow
         self.precipitationWeight = 10
-        self.wind = 20
+        self.wind = 0
+        self.windVolatility = 5
+        self.windTarget = 0
 
 
     def update(self, game):
+        # Update Wind
+        self.windTarget += randint(-self.windVolatility, self.windVolatility)
+        self.wind = (self.windTarget-self.wind)*0.1
+
+        if(randint(0,1000)==0):
+            self.precipitating = not self.precipitating
+
+
+        # Update particles
         if self.precipitating:
             for i in range(self.weight):
                 if self.isSnow:
                     game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+game.camerax,0,game.assets.snowParticle,self.precipitationWeight))
                 else:
-                    game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+game.camerax,0,game.assets.rainParticle,self.precipitationWeight))
+                    game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+self.wind+game.camerax,0,game.assets.rainParticle,self.precipitationWeight))

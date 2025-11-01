@@ -1,13 +1,29 @@
 import pygame
 import assetmanager
+from plrinput import Input
 from random import randint
-from worldobject import WorldObject
 from settings import *
 
-import pygame
-import assetmanager
-from random import randint
-from worldobject import WorldObject
-from settings import *
+class delTree():
+    def __init__(self, assets: assetmanager.AssetManager):
+        self.assetref = assets
+        self.surface = assets.axe
 
-class MenuBar(WorldObject):
+    def update(self, player_input: Input):
+        if player_input.mouse_pressed == True:
+          print("Axe been pressed")
+
+class menuBar():
+    def __init__(self, gwValue, assets):
+        self.gwValue = gwValue
+        self.axe = delTree(assets)
+
+    def show(self, screen):
+        pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
+        # adding global warning variable
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render('Global Warming ' + str(self.gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
+        textRect = text.get_rect()
+        screen.blit(text, textRect, (0,0,10000,10000))
+        # adding axe icon
+        screen.blit(self.axe.surface, (0,0))

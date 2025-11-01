@@ -1,10 +1,13 @@
 import pygame
 import plrinput
 import math
+from random import randint
 
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
-from gamecls.ground import Ground
+from gamecls.menubar import menuBar
+from gamecls.ground import SummerGround
+from gamecls.ground import WinterGround
 from plrinput import Input
 from gamecls.precipitation import PrecipitationManager
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
@@ -15,20 +18,27 @@ class Game:
         self.trees = []
         self.seeds = []
         self.particles = []
-        self.ground = Ground(10, GROUND_Y_LEVEL, assets)
+        self.backgroundDarkness = 1
+
+        self.menuBar = menuBar(0, assets)
+        self.season = 1
+        self.SummerGround = SummerGround(10, GROUND_Y_LEVEL, assets)
+        self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
 
         self.assets = assets
-        self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
+        self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
 
         self.precipitation = PrecipitationManager()
 
-        self.camerax = 0
+        self.camerax = SCREEN_WIDTH*5/4
         self.cameray = 0
 
         self.assets = assets
 
     def update(self, player_input: Input):
         self.precipitation.update(self)
+        if randint(0,1000) == 0:
+            self.menuBar.gwValue += 1
 
         for tree in self.trees:
             tree.update(self)
@@ -43,15 +53,30 @@ class Game:
 
         if player_input.mouse_pos[0] < 100 and self.camerax > 0:
             self.camerax -= 10
-        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH:
+        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5:
             self.camerax += 10
 
     def draw(self, screen):
-        screen.blit(self.assets.background, (0-self.camerax,self.cameray))
+        if self.precipitation.precipitating:
+            targetDarkness = 0.5
+        else:
+            targetDarkness = 1
+        if self.season == 2:
+            targetDarkness -= 0.2
+        self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
+        screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
 
-        for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
-            screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
 
+        
+        if self.season % 2 == 1: # Summer
+            self.precipitation.isSnow = False
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
+                screen.blit(self.SummerGround.surface, (groundpos*self.SummerGround.rect.width - self.camerax, self.SummerGround.globaly - self.cameray, self.SummerGround.rect.width, self.SummerGround.rect.height))
+        else:
+            self.precipitation.isSnow = True
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.WinterGround.rect.width)):
+                screen.blit(self.WinterGround.surface, (groundpos*self.WinterGround.rect.width - self.camerax, self.WinterGround.globaly - self.cameray, self.WinterGround.rect.width, self.WinterGround.rect.height))
+        
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
 
@@ -60,6 +85,8 @@ class Game:
 
         for particle in self.particles:
             screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
+
+        self.menuBar.show(screen)
 
     def createTree(self, x, y):
         return Tree(x, y, self.assets)
