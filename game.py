@@ -12,7 +12,7 @@ class Game:
         self.seeds = []
         self.particles = []
 
-        self.trees.append(Tree(10,10,assets))
+        self.trees.append(Tree(36,64,assets))
 
         # Game state properties
         self.isRaining = False
@@ -41,6 +41,7 @@ class Game:
             self.camerax += 10
 
     def draw(self, screen):
+        screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))

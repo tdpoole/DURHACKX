@@ -15,3 +15,5 @@ class AssetManager:
         self.treeGrowth4 = import_image('assets/Images/treephase1.png')
 
         self.fulltreeGrowth = import_image('assets/Images/FullTree.png')
+
+        self.background = import_image('assets/Images/Background.png')
