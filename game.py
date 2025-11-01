@@ -7,7 +7,7 @@ from gamecls.fallingseed import FallingSeed
 from gamecls.ground import Ground
 from plrinput import Input
 from gamecls.precipitation import PrecipitationManager
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from assetmanager import AssetManager
 
 class Game:
@@ -15,10 +15,10 @@ class Game:
         self.trees = []
         self.seeds = []
         self.particles = []
-        self.ground = Ground(10,SCREEN_HEIGHT-140,assets)
+        self.ground = Ground(10, GROUND_Y_LEVEL, assets)
 
         self.assets = assets
-        self.trees.append(Tree(360,400,assets))
+        self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
 
         self.precipitation = PrecipitationManager()
 
