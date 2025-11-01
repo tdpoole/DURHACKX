@@ -34,7 +34,7 @@ class PrecipitationManager:
         # Update Wind
         self.windTarget += randint(-self.windVolatility, self.windVolatility)
         self.wind = (self.windTarget-self.wind)*0.1
-        self.windVolatility = 10 + game.menuBar.gwValue*2
+        self.windVolatility = 5 + game.menuBar.gwValue
 
         if(randint(0,1000)==0):
             self.precipitating = not self.precipitating
