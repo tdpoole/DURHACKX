@@ -25,11 +25,11 @@ class Game:
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
 
         self.assets = assets
-        self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
+        self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
 
         self.precipitation = PrecipitationManager()
 
-        self.camerax = 0
+        self.camerax = SCREEN_WIDTH*5/4
         self.cameray = 0
 
         self.assets = assets
@@ -52,22 +52,22 @@ class Game:
 
         if player_input.mouse_pos[0] < 100 and self.camerax > 0:
             self.camerax -= 10
-        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH:
+        if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5:
             self.camerax += 10
 
     def draw(self, screen):
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
-
+        screen.blit(self.assets.background, (SCREEN_WIDTH-self.camerax,self.cameray))
         
         if self.season % 2 == 1: # Summer
             self.precipitation.precipitating = False
             self.precipitation.isSnow = False
-            for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.SummerGround.rect.width)):
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
                 screen.blit(self.SummerGround.surface, (groundpos*self.SummerGround.rect.width - self.camerax, self.SummerGround.globaly - self.cameray, self.SummerGround.rect.width, self.SummerGround.rect.height))
         else:
             self.precipitation.precipitating = True
             self.precipitation.isSnow = True
-            for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.WinterGround.rect.width)):
+            for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.WinterGround.rect.width)):
                 screen.blit(self.WinterGround.surface, (groundpos*self.WinterGround.rect.width - self.camerax, self.WinterGround.globaly - self.cameray, self.WinterGround.rect.width, self.WinterGround.rect.height))
         
         for tree in self.trees:
