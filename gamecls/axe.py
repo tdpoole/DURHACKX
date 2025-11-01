@@ -5,10 +5,9 @@ from random import randint
 from settings import *
 
 class Axe:
-    def __init__(self, assets: assetmanager.AssetManager, selected):
+    def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.surface = assets.axe
-        self.selected = selected
         self.sinceSelected = 0
 
     def update(self, player_input: Input):
