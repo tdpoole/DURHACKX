@@ -1,5 +1,7 @@
 import pygame
 import plrinput
+import math
+
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
 from gamecls.ground import Ground
@@ -47,7 +49,8 @@ class Game:
     def draw(self, screen):
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
-        screen.blit(self.ground.surface, (self.ground.globalx - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
+        for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
+            screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
 
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
