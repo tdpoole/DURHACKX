@@ -1,22 +1,11 @@
 import pygame
-import assetmanager
-from plrinput import Input
-from random import randint
 from settings import *
+from gamecls.axe import Axe
 
-class delTree():
-    def __init__(self, assets: assetmanager.AssetManager):
-        self.assetref = assets
-        self.surface = assets.axe
-
-    def update(self, player_input: Input):
-        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(60,42):
-          print("Axe been pressed")
-
-class menuBar():
+class MenuBar:
     def __init__(self, gwValue, assets):
         self.gwValue = gwValue
-        self.axe = delTree(assets)
+        self.axe = Axe(assets)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
