@@ -12,9 +12,9 @@ class FallingSeed(WorldObject):
 
     def update(self, game):
         if not self.attachedToTree:
-            self.globaly += 1
+            self.globaly += 2
             if 0<self.globalx<SCREEN_WIDTH*4:
-                self.globalx += game.precipitation.wind/10
+                self.globalx += game.precipitation.wind/5
             else:
                 game.seeds.remove(self)
             if self.globaly >= GROUND_Y_LEVEL:

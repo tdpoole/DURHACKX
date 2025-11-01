@@ -13,8 +13,8 @@ class PrecipitationParticle(WorldObject):
         self.killme = False
 
     def update(self, game):
-        self.globaly += self.mass
-        self.globalx += (game.precipitation.wind / self.mass) * 10
+        self.globaly += self.mass * 2
+        self.globalx += (game.precipitation.wind / self.mass) * randint(8,12)
         if self.globaly > SCREEN_HEIGHT + 100:
             self.killme = True
 
@@ -23,7 +23,7 @@ class PrecipitationManager:
         # precipitation state properties
         self.precipitating = False
         self.isSnow = False
-        self.weight = 1 # Bigger gives heavier rain/snow
+        self.weight = 10 # Bigger gives heavier rain/snow
         self.precipitationWeight = 10
         self.wind = 0
         self.windVolatility = 5
@@ -34,6 +34,7 @@ class PrecipitationManager:
         # Update Wind
         self.windTarget += randint(-self.windVolatility, self.windVolatility)
         self.wind = (self.windTarget-self.wind)*0.1
+        self.windVolatility = 10 + game.menuBar.gwValue*2
 
         if(randint(0,1000)==0):
             self.precipitating = not self.precipitating
