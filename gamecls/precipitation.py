@@ -9,7 +9,7 @@ from random import randint
 class PrecipitationParticle(WorldObject):
     def __init__(self, x, y, surf, mass):
         super().__init__(x, y, surf)
-        self.mass = mass * 10
+        self.mass = mass
         self.killme = False
 
     def update(self, game):
@@ -21,8 +21,8 @@ class PrecipitationParticle(WorldObject):
 class PrecipitationManager:
     def __init__(self):
         # precipitation state properties
-        self.precipitating = True
-        self.isSnow = True
+        self.precipitating = False
+        self.isSnow = False
         self.weight = 1 # Bigger gives heavier rain/snow
         self.precipitationWeight = 10
         self.wind = 20
