@@ -49,6 +49,8 @@ class Game:
 
         for tree in self.trees:
             tree.update(self, player_input)
+            if tree.health<1:
+                self.trees.remove(tree)
 
         for seed in self.seeds:
             seed.update(self)
