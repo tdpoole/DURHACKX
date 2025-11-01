@@ -9,6 +9,7 @@ class Game:
     def __init__(self, assets):
         self.trees = []
         self.seeds = []
+        self.particles = []
 
         self.trees.append(Tree(10,10,assets))
 
@@ -26,6 +27,9 @@ class Game:
         for seed in self.seeds:
             seed.update(self)
 
+        for particle in self.particles:
+            particle.update(self)
+
         if player_input.mouse_pos[0] < 100:
             self.camerax -= 10
         if player_input.mouse_pos[0] > SCREEN_WIDTH-100:
@@ -38,3 +42,6 @@ class Game:
 
         for seed in self.seeds:
             screen.blit(seed.surface,(seed.globalx-self.camerax, seed.globaly-self.cameray, seed.rect.width, seed.rect.height))
+
+        for particle in self.particles:
+            particle.draw(screen)
