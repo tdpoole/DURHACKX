@@ -17,7 +17,6 @@ class Game:
         self.trees = []
         self.seeds = []
         self.particles = []
-        self.ground = Ground(10, GROUND_Y_LEVEL, assets)
         self.globalWarming = 0
         self.menuBar = menuBar(self.globalWarming)
         self.season = 1
@@ -57,10 +56,7 @@ class Game:
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
         self.menuBar.show(screen)
-
-        for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
-            screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
-
+        
         if self.season % 2 == 1: # Summer
             self.precipitation.precipitating = False
             self.precipitation.isSnow = False
