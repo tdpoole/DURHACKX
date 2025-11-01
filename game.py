@@ -5,7 +5,7 @@ from random import randint
 
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
-from gamecls.menubar import MenuBar
+from gamecls.menubar import menuBar
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
 from plrinput import Input
@@ -21,7 +21,7 @@ class Game:
         self.healthBars = []
         self.backgroundDarkness = 1
 
-        self.menuBar = MenuBar(0, assets)
+        self.menuBar = menuBar(0, assets)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)

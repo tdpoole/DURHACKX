@@ -2,22 +2,14 @@ import pygame
 from settings import *
 import assetmanager
 from plrinput import Input
-from gamecls import Axe
-
-class wateringCan():
-    def __init__(self, assets: assetmanager.AssetManager):
-        self.assetref = assets
-        self.surface = assets.wateringcan
-
-    def update(self, player_input: Input):
-        if player_input.mouse_pressed[0] and (110,12) < player_input.mouse_pos < (190,64):
-            print("watering can")
+from gamecls.axe import Axe
+from gamecls.wateringcan import WateringCan
 
 class menuBar():
     def __init__(self, gwValue, assets):
         self.gwValue = gwValue
         self.axe = Axe(assets)
-        self.wateringcan = wateringCan(assets)
+        self.wateringcan = WateringCan(assets)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
