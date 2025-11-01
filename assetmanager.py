@@ -15,6 +15,3 @@ class AssetManager:
         self.treeGrowth4 = import_image('assets/placeholder.svg')
 
         self.fulltreeGrowth = import_image('assets/Images/FullTree.png')
-
-        self.groundBackground = import_image('assets/Images/GroundBackground.png')
-        self.skyBackground = import_image('assets/Images/SkyBackground.png')
