@@ -59,7 +59,7 @@ class Game:
         if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5 and player_input.mouse_pos[1]>80:
             self.camerax += 10
 
-    def draw(self, screen):
+    def draw(self, screen, player_input):
         if self.precipitation.precipitating:
             targetDarkness = 0.5
         else:
@@ -68,8 +68,6 @@ class Game:
             targetDarkness -= 0.2
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
-
-
         
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
@@ -90,6 +88,9 @@ class Game:
             screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
 
         self.menuBar.show(screen)
+
+        if self.menuBar.axe.selected:
+            screen.blit(self.menuBar.axe.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))
 
     def createTree(self, x, y):
         return Tree(x, y, self.assets)
