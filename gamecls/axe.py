@@ -17,7 +17,7 @@ class Axe:
                     selected = "Axe"
                     self.sinceSelected = 0
                 elif selected == "Axe":
-                    selected == ""
+                    selected = ""
                     self.sinceSelected = 0
         else:
             self.sinceSelected += 1

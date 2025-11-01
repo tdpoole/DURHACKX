@@ -17,7 +17,7 @@ class WateringCan:
                     selected = "Can"
                     self.sinceSelected = 0
                 elif selected == "Can":
-                    selected == ""
+                    selected = ""
                     self.sinceSelected = 0
         else:
             self.sinceSelected += 1
