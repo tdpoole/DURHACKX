@@ -3,37 +3,35 @@ import assetmanager
 from settings import SCREEN_HEIGHT, SCREEN_WIDTH
 from worldobject import WorldObject
 from random import randint
-from game import Game
 
 
 
 class PrecipitationParticle(WorldObject):
-    def __init__(self, x, y, assets: assetmanager.AssetManager, mass):
-        super().__init__(x, y, assets.rainParticle)
-        self.mass = mass
+    def __init__(self, x, y, surf, mass):
+        super().__init__(x, y, surf)
+        self.mass = mass * 10
         self.killme = False
 
     def update(self, game):
-        self.globaly -= self.mass
-        self.globaly += (game.wind / self.mass) * 10
+        self.globaly += self.mass
+        self.globalx += (game.precipitation.wind / self.mass) * 10
         if self.globaly > SCREEN_HEIGHT + 100:
             self.killme = True
 
 class PrecipitationManager:
     def __init__(self):
         # precipitation state properties
-        self.precipitating = False
-        self.isSnow = False
-        self.weight = 10 # Smaller gives heavier rain/snow
-        self.wind = 0
+        self.precipitating = True
+        self.isSnow = True
+        self.weight = 1 # Bigger gives heavier rain/snow
+        self.precipitationWeight = 10
+        self.wind = 20
 
 
-        # Private
-        self.nextPrecipitationTimer = self.weight
-
-    def update(self, game:Game):
+    def update(self, game):
         if self.precipitating:
-            self.nextPrecipitationTimer-=1
-            if self.nextPrecipitationTimer <= 0:
-                self.nextPrecipitationTimer = self.weight
-                game.particles.append(PrecipitationParticle(randint(0,SCREEN_WIDTH),-100,game.assets,100/self.weight))
+            for i in range(self.weight):
+                if self.isSnow:
+                    game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+game.camerax,0,game.assets.snowParticle,self.precipitationWeight))
+                else:
+                    game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+game.camerax,0,game.assets.rainParticle,self.precipitationWeight))

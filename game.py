@@ -4,6 +4,7 @@ from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
 from plrinput import Input
 from settings import SCREEN_WIDTH
+from gamecls.precipitation import PrecipitationManager
 
 
 class Game:
@@ -12,11 +13,10 @@ class Game:
         self.seeds = []
         self.particles = []
 
+        self.assets = assets
         self.trees.append(Tree(10,10,assets))
 
-        # Game state properties
-        self.isRaining = False
-        self.wind = 0
+        self.precipitation = PrecipitationManager()
 
         self.camerax = 0
         self.cameray = 0
@@ -24,6 +24,8 @@ class Game:
         self.assets = assets
 
     def update(self, player_input: Input):
+        self.precipitation.update(self)
+
         for tree in self.trees:
             tree.update(self)
 
@@ -49,7 +51,7 @@ class Game:
             screen.blit(seed.surface,(seed.globalx-self.camerax, seed.globaly-self.cameray, seed.rect.width, seed.rect.height))
 
         for particle in self.particles:
-            particle.draw(screen)
+            screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
 
     def createTree(self, x, y):
         return Tree(x, y, self.assets)
