@@ -2,9 +2,9 @@ import pygame
 
 class AssetManager:
     def __init__(self):
-        self.seed = pygame.image.load('assets/placeholder.png')
+        self.seed = pygame.image.load('assets/placeholder.svg')
 
-        self.treeGrowth0 = pygame.image.load('assets/placeholder.png')
+        self.treeGrowth0 = pygame.image.load('assets/placeholder.svg')
 
         self.fulltreeGrowth = pygame.image.load('assets/Images/FullTree.png')
 

@@ -1,5 +1,5 @@
 import pygame
-import settings
+from settings import *
 import plrinput
 from assetmanager import AssetManager
 from game import *
@@ -7,7 +7,7 @@ from game import *
 def main():
     pygame.init()
 
-    window = pygame.display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
+    window = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("DURHACKX")
     clock = pygame.time.Clock()
     running = True
@@ -34,7 +34,7 @@ def main():
         game.draw(window)
         pygame.display.flip()
 
-        clock.tick(60)
+        clock.tick(FRAMERATE)
 
     pygame.quit()
 
