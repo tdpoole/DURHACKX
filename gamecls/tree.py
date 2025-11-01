@@ -13,6 +13,7 @@ class Tree:
         self.timeAlive = 0
 
         self.growthSurfs.append(assets.treeGrowth0)
+        self.growthSurfs.append(assets.fulltreeGrowth)
 
     def update(self):
         self.timeAlive += 1
