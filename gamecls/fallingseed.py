@@ -11,7 +11,7 @@ class FallingSeed(WorldObject):
 
     def update(self, game):
         if not self.attachedToTree:
-            self.rect.y += 1
+            self.globaly += 1
         if self.attachedToTree:
             if randint(0,100)==0:
                 self.attachedToTree = False
