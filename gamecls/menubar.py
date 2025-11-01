@@ -4,7 +4,7 @@ from plrinput import Input
 from random import randint
 from settings import *
 
-class button():
+class delTree():
     def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
 
@@ -15,10 +15,10 @@ class button():
 class menuBar():
     def __init__(self, gwValue):
         self.gwValue = gwValue
-        self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.text = self.font.render('Global Warming ' + str(gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
-        self.textRect = self.text.get_rect()
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
-        screen.blit(self.text, self.textRect, (0,0,10000,10000))
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render('Global Warming ' + str(self.gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
+        textRect = text.get_rect()
+        screen.blit(text, textRect, (0,0,10000,10000))

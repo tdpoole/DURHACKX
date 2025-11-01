@@ -1,6 +1,7 @@
 import pygame
 import plrinput
 import math
+from random import randint
 
 from gamecls.tree import Tree
 from gamecls.fallingseed import FallingSeed
@@ -17,8 +18,7 @@ class Game:
         self.seeds = []
         self.particles = []
         self.ground = Ground(10, GROUND_Y_LEVEL, assets)
-        self.globalWarming = 0
-        self.menuBar = menuBar(self.globalWarming)
+        self.menuBar = menuBar(0)
 
         self.assets = assets
         self.trees.append(Tree(360,SCREEN_HEIGHT-140,self.assets))
@@ -32,6 +32,8 @@ class Game:
 
     def update(self, player_input: Input):
         self.precipitation.update(self)
+        if randint(0,1000) == 0:
+            self.menuBar.gwValue += 1
 
         for tree in self.trees:
             tree.update(self)
@@ -52,8 +54,6 @@ class Game:
     def draw(self, screen):
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
-        self.menuBar.show(screen)
-
         for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
             screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
 
@@ -65,6 +65,8 @@ class Game:
 
         for particle in self.particles:
             screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
+
+        self.menuBar.show(screen)
 
     def createTree(self, x, y):
         return Tree(x, y, self.assets)
