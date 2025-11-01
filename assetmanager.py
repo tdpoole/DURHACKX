@@ -1,8 +1,8 @@
 import pygame
 from settings import PIXEL_SCALE_FACTOR
 
-def import_image(imgpath):
-    return pygame.transform.scale_by(pygame.image.load(imgpath), PIXEL_SCALE_FACTOR)
+def import_image(imgpath, scale=1):
+    return pygame.transform.scale_by(pygame.image.load(imgpath), PIXEL_SCALE_FACTOR*scale)
 
 class AssetManager:
     def __init__(self):
@@ -22,3 +22,5 @@ class AssetManager:
         self.fulltreeGrowth = import_image('assets/Images/treephase4.png')
 
         self.background = import_image('assets/Images/Background.png')
+
+        self.axe = import_image('assets/Images/Axe.png', 0.3)

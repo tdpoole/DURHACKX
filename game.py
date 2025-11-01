@@ -20,7 +20,7 @@ class Game:
         self.particles = []
         self.backgroundDarkness = 1
 
-        self.menuBar = menuBar(0)
+        self.menuBar = menuBar(0, assets)
         self.season = 1
         self.SummerGround = SummerGround(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
