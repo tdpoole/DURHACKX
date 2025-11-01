@@ -17,7 +17,7 @@ class FallingSeed(WorldObject):
                 self.globalx += game.precipitation.wind/10
             if self.globaly >= GROUND_Y_LEVEL:
                 game.seeds.remove(self)
-                game.trees.append(game.createTree(self.globalx, self.globaly-2000))
+                game.trees.append(game.createTree(self.globalx, self.globaly))
 
         if self.attachedToTree:
             if randint(0,100)==0:
