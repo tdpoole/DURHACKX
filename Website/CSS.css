@@ -41,6 +41,7 @@
     transition: box-shadow 1s,background-color 0.5s;
     font-size: large;
     padding: 5px 20px 5px 20px;
+    border-radius: 10px;
   }
   .btn1:hover{
     cursor: pointer;
@@ -51,4 +52,17 @@
   .h1,p,.btn1{
     margin-left: 60px;
     margin-bottom: 20px;
+  }
+  .div2{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+    text-align: center;
+  }
+  .img1{
+    width: 200px;
+    height: fit-content;
+  }
+  .img2{
+    width: 200px;
   }
