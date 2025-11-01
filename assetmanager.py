@@ -23,3 +23,4 @@ class AssetManager:
 
         self.axe = import_image('assets/Images/Axe.png', 0.3)
         self.wateringcan = import_image('assets/Images/wateringcan.png', 0.2)
+        self.watertank = import_image('assets/Images/watertank.png', 0.3)

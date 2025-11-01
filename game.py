@@ -41,6 +41,7 @@ class Game:
         self.precipitation.update(self)
         self.selected = self.menuBar.axe.update(player_input, self.selected)
         self.selected = self.menuBar.wateringcan.update(player_input, self.selected)
+        self.menuBar.watertank.update(player_input)
 
         if randint(0,1000) == 0:
             self.menuBar.gwValue += 1

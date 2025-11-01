@@ -4,12 +4,14 @@ import assetmanager
 from plrinput import Input
 from gamecls.axe import Axe
 from gamecls.wateringcan import WateringCan
+from gamecls.watertank import WaterTank
 
 class menuBar():
     def __init__(self, gwValue, assets):
         self.gwValue = gwValue
         self.axe = Axe(assets)
         self.wateringcan = WateringCan(assets)
+        self.watertank = WaterTank(assets, 100)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
@@ -22,3 +24,5 @@ class menuBar():
         screen.blit(self.axe.surface, (20,12))
         # etc
         screen.blit(self.wateringcan.surface, (110,12))
+        # adding water tank icon
+        self.watertank.show(screen)
