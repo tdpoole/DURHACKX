@@ -43,7 +43,7 @@ class Tree (WorldObject):
                 if randint(0,500) == 0:
                     self.isWatered = False
                     self.growthStage+=1
-                    self.maxhealth = (600 + (200*self.growthStage))
+                    self.maxhealth = (600 + (300*self.growthStage))
                     if self.growthStage >= len(self.growthSurfs):
                         self.fullyGrown = True
                         self.surface = self.fullygrownsurf
@@ -73,3 +73,11 @@ class Tree (WorldObject):
         if self.fullyGrown:
             if randint(0,500) == 0:
                 game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
+
+        # Life drains quicker if close to other trees
+        for othertree in game.trees:
+            if othertree == self: continue
+            xpos = othertree.globalx
+            horizDiff = self.globalx - xpos
+            if horizDiff < 0: horizDiff = -horizDiff
+            self.health -= 200/horizDiff
