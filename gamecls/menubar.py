@@ -6,13 +6,15 @@ from gamecls.axe import Axe
 from gamecls.wateringcan import WateringCan
 
 class menuBar():
-    def __init__(self, gwValue, assets):
+    def __init__(self, gwValue, assets: assetmanager.AssetManager):
         self.gwValue = gwValue
         self.axe = Axe(assets)
         self.wateringcan = WateringCan(assets)
+        self.surface = assets.topbar
 
     def show(self, screen):
-        pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
+        # pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
+        screen.blit(self.surface, (0, 0, 64, 10))
         # adding global warning variable
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render('Global Warming ' + str(self.gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
