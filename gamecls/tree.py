@@ -1,5 +1,5 @@
 import pygame
-from pygame.math import clamp
+from gamecls.healthbar import HealthBar
 
 import assetmanager
 from random import randint
@@ -22,6 +22,12 @@ class Tree (WorldObject):
 
         self.timeAlive = 0
 
+        self.maxhealth = 600
+        self.health = self.maxhealth
+
+        self.isWatered = False
+        self.mouseHovered = False
+
         self.growthSurfs.append(assets.treeGrowth0)
         self.growthSurfs.append(assets.treeGrowth1)
         self.growthSurfs.append(assets.treeGrowth2)
@@ -32,7 +38,8 @@ class Tree (WorldObject):
         super().__init__(x, y, assets.treeGrowth0)
 
 
-    def update(self, game):
+    def update(self, game, input):
+
         self.timeAlive += 1
         if self.timeAlive >= 1000:
             self.fullyGrown = True
@@ -43,11 +50,18 @@ class Tree (WorldObject):
         self.growthStage = self.timeAlive // 200
         self.growthStage=max(0, min(self.growthStage, len(self.growthSurfs)-1))
 
+        self.health-=1
+        print(self.rect)
+        if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
+            self.mouseHovered = True
+        else:
+            self.mouseHovered = False
+
         if not self.fullyGrown:
             self.surface = self.growthSurfs[self.growthStage]
+            self.rect = self.surface.get_rect(x = self.globalx - game.camerax,y=self.globaly - game.cameray)
             self.globaly = self.ypos - self.surface.get_height()
             self.globalx = self.xpos - self.surface.get_width()
-
         if self.fullyGrown:
             if randint(0,500) == 0:
                 game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
