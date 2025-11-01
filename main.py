@@ -34,7 +34,7 @@ def main():
 
         game.update(player_input)
 
-        game.draw(window)
+        game.draw(window, player_input)
         pygame.display.flip()
 
         clock.tick(FRAMERATE)

@@ -1,7 +1,4 @@
 import pygame
-import assetmanager
-from plrinput import Input
-from random import randint
 from settings import *
 
 class delTree():
@@ -10,7 +7,7 @@ class delTree():
         self.surface = assets.axe
 
     def update(self, player_input: Input):
-        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(100,72):
+        if player_input.mouse_pressed[0] and (20,12)<player_input.mouse_pos<(60,42):
           print("Axe been pressed")
 
 class wateringCan():
@@ -25,7 +22,7 @@ class wateringCan():
 class menuBar():
     def __init__(self, gwValue, assets):
         self.gwValue = gwValue
-        self.axe = delTree(assets)
+        self.axe = Axe(assets)
         self.wateringcan = wateringCan(assets)
 
     def show(self, screen):
