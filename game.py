@@ -64,7 +64,6 @@ class Game:
         if self.season == 2:
             targetDarkness -= 0.2
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
-        print(self.backgroundDarkness)
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
 
 
