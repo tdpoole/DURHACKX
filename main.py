@@ -34,7 +34,6 @@ def main():
 
         game.update(player_input)
 
-        window.fill((0,0,0))
         game.draw(window)
         pygame.display.flip()
 
