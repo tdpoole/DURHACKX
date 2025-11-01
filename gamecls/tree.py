@@ -32,23 +32,27 @@ class Tree (WorldObject):
         self.growthSurfs.append(assets.treeGrowth1)
         self.growthSurfs.append(assets.treeGrowth2)
         self.growthSurfs.append(assets.treeGrowth3)
-        self.growthSurfs.append(assets.treeGrowth4)
         self.fullygrownsurf = assets.fulltreeGrowth
 
         super().__init__(x, y, assets.treeGrowth0)
 
 
     def update(self, game, input):
+        if self.isWatered:
+            if not self.fullyGrown:
+                if randint(0,500) == 0:
+                    self.isWatered = False
+                    self.growthStage+=1
+                    self.maxhealth = (600 + (200*self.growthStage))
+                    if self.growthStage >= len(self.growthSurfs):
+                        self.fullyGrown = True
+                        self.surface = self.fullygrownsurf
+                    else:
+                        self.surface = self.growthSurfs[self.growthStage]
 
-        self.timeAlive += 1
-        if self.timeAlive >= 1000:
-            self.fullyGrown = True
-            self.surface = self.fullygrownsurf
-            self.globaly = self.ypos - self.surface.get_height()
-            self.globalx = self.xpos - self.surface.get_width()
-
-        self.growthStage = self.timeAlive // 200
-        self.growthStage=max(0, min(self.growthStage, len(self.growthSurfs)-1))
+        self.rect = self.surface.get_rect(x=self.globalx - game.camerax, y=self.globaly - game.cameray)
+        self.globaly = self.ypos - self.surface.get_height()
+        self.globalx = self.xpos - self.surface.get_width()
 
         self.health-=1
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
@@ -57,11 +61,6 @@ class Tree (WorldObject):
         else:
             self.mouseHovered = False
 
-        if not self.fullyGrown:
-            self.surface = self.growthSurfs[self.growthStage]
-            self.rect = self.surface.get_rect(x = self.globalx - game.camerax,y=self.globaly - game.cameray)
-            self.globaly = self.ypos - self.surface.get_height()
-            self.globalx = self.xpos - self.surface.get_width()
         if self.fullyGrown:
             if randint(0,500) == 0:
                 game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
