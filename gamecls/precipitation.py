@@ -35,6 +35,10 @@ class PrecipitationManager:
         self.windTarget += randint(-self.windVolatility, self.windVolatility)
         self.wind = (self.windTarget-self.wind)*0.1
 
+        if(randint(0,1000)==0):
+            self.precipitating = not self.precipitating
+
+
         # Update particals
         if self.precipitating:
             for i in range(self.weight):
