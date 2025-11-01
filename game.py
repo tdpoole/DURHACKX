@@ -52,6 +52,8 @@ class Game:
     def draw(self, screen):
         screen.blit(self.assets.background, (0-self.camerax,self.cameray))
 
+        self.menuBar.show(screen)
+
         for groundpos in range(0, math.ceil(SCREEN_WIDTH*3/self.ground.rect.width)):
             screen.blit(self.ground.surface, (groundpos*self.ground.rect.width - self.camerax, self.ground.globaly - self.cameray, self.ground.rect.width, self.ground.rect.height))
 
