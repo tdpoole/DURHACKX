@@ -1,5 +1,4 @@
 import pygame
-from game import Game
 
 class WorldObject:
     def __init__(self,x,y, surf):
@@ -8,5 +7,5 @@ class WorldObject:
         self.surface = surf
         self.rect = self.surface.get_rect()
 
-    def update(self,game:Game):
+    def update(self,game):
         raise NotImplementedError
