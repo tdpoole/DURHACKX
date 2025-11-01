@@ -1,0 +1,54 @@
+*{
+    font-family: Bitcount Grid Single;
+    border: 0;
+    margin: 0;
+  }
+  ul{
+    list-style-type: none;
+    background-color: black;
+    color: rgb(158, 143, 143);
+    font-size: large;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .home{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: larger;
+    margin-bottom: 7px;
+  }
+  .home:hover{
+    cursor: pointer;
+  }
+  .about:hover{
+    cursor: pointer;
+  }
+  .about{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: larger;
+  }
+  ul li{
+    margin: auto;
+  }
+  
+  .btn1{
+    border: 1px solid gray;
+    transition: box-shadow 1s,background-color 0.5s;
+    font-size: large;
+    padding: 5px 20px 5px 20px;
+  }
+  .btn1:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+    background-color: black;
+    color: white;
+  }
+  .h1,p,.btn1{
+    margin-left: 60px;
+    margin-bottom: 20px;
+  }
