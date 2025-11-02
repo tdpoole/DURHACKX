@@ -16,6 +16,8 @@ def inverted(img):
 
 class AssetManager:
     def __init__(self):
+        pygame.mixer.set_num_channels(16)
+
         self.seed = import_image('assets/Images/seed.png')
         self.leaf = import_image('assets/Images/leaf.png')
         self.ground = import_image('assets/Images/ground.png')
