@@ -11,4 +11,4 @@ class WaterBar:
 
     def draw(self, screen):
         pygame.draw.rect(screen, pygame.Color(255,0,0), self.bgRect)
-        pygame.draw.rect(screen, pygame.Color(255,0,0), self.fgRect)
+        pygame.draw.rect(screen, pygame.Color(0,0,255), self.fgRect)
