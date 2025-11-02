@@ -7,6 +7,7 @@ class WaterTank:
     def __init__(self, assets: assetmanager.AssetManager, stage):
         self.assetref = assets
         self.surface = assets.watertank
+        self.rect = self.surface.get_rect(x=425,y=24)
         self.stage = stage
         self.sizes = [100,200,300,400,500]
         self.costs = [0,500,1500,3000,10000]
