@@ -25,3 +25,4 @@ class Mole(WorldObject):
 
         if self.rect.collidepoint(pygame.mouse.get_pos()) and game.selected == "Axe" and pygame.mouse.get_pressed()[0]:
             self.retracting=True
+            self.surface = self.assetref.bonkmole
