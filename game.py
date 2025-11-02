@@ -186,7 +186,7 @@ class Game:
 
         self.menuBar.show(screen, self.year)
         self.currency.draw(screen)
-        self.waterbar.draw(screen)
+        self.waterbar.draw(screen, self)
         self.goal.draw(screen, len(self.trees))
 
         if self.selected == "Axe":
