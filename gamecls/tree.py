@@ -38,7 +38,7 @@ class Tree (WorldObject):
 
 
     def update(self, game, input):
-        if self.health == self.maxhealth:
+        if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
                     self.isWatered = False
