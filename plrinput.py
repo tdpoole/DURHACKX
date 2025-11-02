@@ -13,7 +13,6 @@ class Input:
         if not mouse:
             self.mouseRisingEdge = False
         if mouse and not self.mouseRisingEdge:
-            print("Click")
             self.mouseRisingEdge = True
             self.mouse_pressed = [pygame.mouse.get_pressed()[0]]
 

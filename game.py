@@ -53,8 +53,12 @@ class Game:
         self.currency.amount = self.menuBar.watertank.update(player_input, self.currency.amount)
         self.waterbar.update(self)
 
-        if len(self.trees) <= 20:
+        if len(self.trees) <= 5:
             self.menuBar.gwValue = 100 - (len(self.trees)-1)*5
+        elif len(self.trees) <= 10:
+            self.menuBar.gwValue = 100 - 25 - (len(self.trees)-6)*2
+        elif len(self.trees) <= 20:
+            self.menuBar.gwValue = 100 - 35 - (len(self.trees)-11)*1
         else:
             self.menuBar.gwValue = 0
 

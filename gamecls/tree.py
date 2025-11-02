@@ -38,7 +38,11 @@ class Tree (WorldObject):
 
 
     def update(self, game, input):
-        if self.isWatered:
+        if self.isWatered and self.growthStage == 0:
+            self.isWatered = False
+            self.growthStage += 1
+            self.maxhealth = (600 + (300 * self.growthStage))
+        if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
                     self.isWatered = False
@@ -54,9 +58,8 @@ class Tree (WorldObject):
         self.globaly = self.ypos - self.surface.get_height()
         self.globalx = self.xpos - self.surface.get_width()
 
-        self.health-=1
         if game.precipitation.precipitating:
-            self.health += game.precipitation.weight/10
+            self.health += game.precipitation.weight/5
             if self.health > self.maxhealth:
                 self.health = self.maxhealth
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
@@ -71,7 +74,7 @@ class Tree (WorldObject):
                         self.health = self.maxhealth
                     self.isWatered = True
                 elif game.selected == "Axe" and self.fullyGrown:
-                    self.health -= 1000
+                    self.health -= 100000
                     game.currency.amount+=100
         else:
             self.mouseHovered = False
@@ -88,4 +91,4 @@ class Tree (WorldObject):
             xpos = othertree.globalx
             horizDiff = self.globalx - xpos
             if horizDiff < 0: horizDiff = -horizDiff
-            self.health -= 200/horizDiff
+            self.health -= 100/horizDiff
