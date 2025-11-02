@@ -19,7 +19,7 @@ class Currency:
 
     def draw(self, screen):
         text = self.font.render(f"Currency: {self.amount}", True, (0, 0, 0))
-        screen.blit(text, (720, 30))
+        screen.blit(text, (1000, 50))
 
 
 

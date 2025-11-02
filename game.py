@@ -25,12 +25,12 @@ class Game:
         self.backgroundDarkness = 1
 
         self.selected = ""
+        self.year = 1
         self.menuBar = menuBar(100, assets)
         self.waterbar = WaterBar(500,50,300,30)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
-        self.year = 1
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
@@ -123,7 +123,7 @@ class Game:
         for bar in self.healthBars:
             bar.draw(screen)
 
-        self.menuBar.show(screen)
+        self.menuBar.show(screen, self.year)
         self.currency.draw(screen)
         self.waterbar.draw(screen)
 

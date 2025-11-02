@@ -64,7 +64,8 @@ class Tree (WorldObject):
             game.healthBars.append(HealthBar(self.health/self.maxhealth,self.rect.x,self.rect.y+self.rect.height+10,self.rect.width, 20))
 
             if input.mouse_pressed[0]:
-                if game.selected == "Can":
+                if game.selected == "Can" and game.menuBar.watertank.currentWater>10:
+                    game.menuBar.watertank.currentWater-=10
                     self.health += 100
                     if self.health > self.maxhealth:
                         self.health = self.maxhealth
