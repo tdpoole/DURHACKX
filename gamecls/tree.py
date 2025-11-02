@@ -55,6 +55,10 @@ class Tree (WorldObject):
         self.globalx = self.xpos - self.surface.get_width()
 
         self.health-=1
+        if game.precipitation.precipitating:
+            self.health += game.precipitation.weight/10
+            if self.health > self.maxhealth:
+                self.health = self.maxhealth
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
             self.mouseHovered = True
             game.healthBars.append(HealthBar(self.health/self.maxhealth,self.rect.x,self.rect.y+self.rect.height+10,self.rect.width, 20))

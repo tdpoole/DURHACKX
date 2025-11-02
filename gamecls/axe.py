@@ -8,11 +8,12 @@ class Axe:
     def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.surface = assets.axe
+        self.rect = self.surface.get_rect(x=200,y=24)
         self.sinceSelected = 0
 
     def update(self, player_input: Input, selected):
         if self.sinceSelected > 30:
-            if player_input.mouse_pressed[0] and (20,12) < player_input.mouse_pos < (100,42):
+            if player_input.mouse_pressed[0] and self.rect.collidepoint(player_input.mouse_pos):
                 if selected == "" or selected == "Can":
                     selected = "Axe"
                     self.sinceSelected = 0

@@ -16,10 +16,14 @@ class AssetManager:
         self.treeGrowth3 = import_image('assets/Images/treephase4.png')
         self.treeGrowth4 = import_image('assets/Images/treephase4.png')
 
-        self.rainParticle = import_image('assets/Images/rainParticle.png', 0.25)
-        self.snowParticle = import_image('assets/Images/snowParticle.png', 0.25)
+        self.rainParticle = import_image('assets/Images/rainParticle.png', 0.7)
+        self.snowParticle = import_image('assets/Images/snowParticle.png', 0.35)
 
         self.fulltreeGrowth = import_image('assets/Images/treephase4.png')
 
+        self.topbar = import_image('assets/Images/topbar.png', 0.5)
+        self.cloud = import_image('assets/Images/cloud.png')
+
         self.axe = import_image('assets/Images/Axe.png', 0.3)
         self.wateringcan = import_image('assets/Images/wateringcan.png', 0.2)
+        self.watertank = import_image('assets/Images/watertank.png', 0.3)
