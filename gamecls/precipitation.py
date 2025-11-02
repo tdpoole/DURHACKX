@@ -35,7 +35,6 @@ class PrecipitationManager:
         self.windTarget += randint(-self.windVolatility, self.windVolatility)
         self.windTarget = min(game.menuBar.gwValue*2, max(-game.menuBar.gwValue*2, self.windTarget))
         self.wind = min(50, max(-50, self.wind))
-        print(self.wind)
         self.wind = (self.windTarget-self.wind)*0.1
         self.windVolatility = 5 + game.menuBar.gwValue//10
         self.weight = (game.menuBar.gwValue+20)//10
