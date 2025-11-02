@@ -23,6 +23,8 @@ class Game:
         self.particles = []
         self.healthBars = []
         self.clouds = []
+        self.zombieSaplings = []
+        self.zombieParticles = []
         self.backgroundDarkness = 1
 
         self.selected = ""
@@ -77,10 +79,18 @@ class Game:
         for leaf in self.leafs:
             leaf.update(self)
 
+        for spore in self.zombieParticles:
+            spore.update(self)
+
         for particle in self.particles:
             particle.update(self)
             if particle.killme:
                 self.particles.remove(particle)
+
+        for s in self.zombieSaplings:
+            s.update(self,player_input)
+            if s.axed:
+                self.zombieSaplings.remove(s)
 
         if player_input.mouse_pos[0] < 100 and self.camerax > 0 and player_input.mouse_pos[1]>80:
             self.camerax -= 10
@@ -120,10 +130,16 @@ class Game:
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
 
+        for tree in self.zombieSaplings:
+            screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+
         for seed in self.seeds:
             screen.blit(seed.surface,(seed.globalx-self.camerax, seed.globaly-self.cameray, seed.rect.width, seed.rect.height))
 
         for leaf in self.leafs:
+            screen.blit(leaf.surface,(leaf.globalx-self.camerax, leaf.globaly-self.cameray, leaf.rect.width, leaf.rect.height))
+
+        for leaf in self.zombieParticles:
             screen.blit(leaf.surface,(leaf.globalx-self.camerax, leaf.globaly-self.cameray, leaf.rect.width, leaf.rect.height))
 
         for particle in self.particles:

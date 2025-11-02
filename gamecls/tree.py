@@ -93,3 +93,7 @@ class Tree (WorldObject):
             horizDiff = self.globalx - xpos
             if horizDiff < 0: horizDiff = -horizDiff
             self.health -= 100/horizDiff
+
+        for zpart in game.zombieParticles:
+            if (self.globalx+self.rect.width/2)-10 < zpart.globalx < (self.globalx+self.rect.width/2)+10:
+                self.health -= 10
