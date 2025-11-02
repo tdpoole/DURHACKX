@@ -10,6 +10,8 @@ class MiniGoal:
     def getGoal(self):
         if self.goalYear == 10:
             return randint(2,4)
+        elif self.goalYear == 20:
+            return randint(3,6)
         else:
             return randint(5,8)
 
