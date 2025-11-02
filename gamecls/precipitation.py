@@ -33,11 +33,20 @@ class PrecipitationManager:
     def update(self, game):
         # Update Wind
         self.windTarget += randint(-self.windVolatility, self.windVolatility)
+        self.windTarget = min(game.menuBar.gwValue*2, max(-game.menuBar.gwValue*2, self.windTarget))
+        self.wind = min(50, max(-50, self.wind))
         self.wind = (self.windTarget-self.wind)*0.1
-        self.windVolatility = 5 + game.menuBar.gwValue
+        self.windVolatility = 5 + game.menuBar.gwValue//10
+        self.weight = (game.menuBar.gwValue+20)//10
 
-        if(randint(0,1000)==0):
-            self.precipitating = not self.precipitating
+        # Raining based on global warming. THe greater global warming, the more rain
+        #if(randint(0,10)==0):
+        if self.precipitating:
+            if randint(0,100 + game.menuBar.gwValue*5)==0:
+                self.precipitating = False
+        else:
+            if randint(0,600-game.menuBar.gwValue*5)==0:
+                self.precipitating = True
 
 
         # Update particles

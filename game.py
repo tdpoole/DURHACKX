@@ -11,6 +11,7 @@ from gamecls.clouds import Cloud
 from plrinput import Input
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from gamecls.currency import Currency
+from gamecls.waterbar import WaterBar
 
 class Game:
     def __init__(self, assets):
@@ -22,7 +23,8 @@ class Game:
         self.backgroundDarkness = 1
 
         self.selected = ""
-        self.menuBar = menuBar(0, assets)
+        self.menuBar = menuBar(100, assets)
+        self.waterbar = WaterBar(500,50,300,30)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
@@ -47,9 +49,12 @@ class Game:
         self.selected = self.menuBar.axe.update(player_input, self.selected)
         self.selected = self.menuBar.wateringcan.update(player_input, self.selected)
         self.currency.amount = self.menuBar.watertank.update(player_input, self.currency.amount)
+        self.waterbar.update(self)
 
-        if randint(0,1000) == 0:
-            self.menuBar.gwValue += 1
+        if len(self.trees) <= 20:
+            self.menuBar.gwValue = 100 - (len(self.trees)-1)*5
+        else:
+            self.menuBar.gwValue = 0
 
         for tree in self.trees:
             tree.update(self, player_input)
@@ -115,6 +120,7 @@ class Game:
 
         self.menuBar.show(screen)
         self.currency.draw(screen)
+        self.waterbar.draw(screen)
 
         if self.selected == "Axe":
             screen.blit(self.menuBar.axe.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))

@@ -21,7 +21,7 @@ class menuBar():
         font = pygame.font.Font('freesansbold.ttf', 32)
         text = font.render('Global Warming ' + str(self.gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
         textRect = text.get_rect()
-        screen.blit(text, textRect, (720, 30, 24, 6))
+        screen.blit(text, textRect)
         # adding axe icon
         screen.blit(self.axe.surface, self.axe.rect)
         # etc

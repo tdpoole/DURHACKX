@@ -14,6 +14,8 @@ class WaterTank:
         self.mouseHovered = False
         self.sinceSelected = 0
 
+        self.currentWater = self.sizes[self.stage]
+
     def update(self, player_input: Input, currency):
         if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
