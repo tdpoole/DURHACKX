@@ -7,6 +7,7 @@ from gamecls.ground import WinterGround
 from gamecls.menubar import menuBar
 from gamecls.precipitation import PrecipitationManager
 from gamecls.tree import Tree
+from gamecls.clouds import Cloud
 from plrinput import Input
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from gamecls.currency import Currency
@@ -18,6 +19,7 @@ class Game:
         self.seeds = []
         self.particles = []
         self.healthBars = []
+        self.clouds = []
         self.backgroundDarkness = 1
 
         self.selected = ""
@@ -30,6 +32,8 @@ class Game:
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
+        for i in range(1,5):
+            self.clouds.append(Cloud(SCREEN_WIDTH+randint(-1200,1200), SCREEN_HEIGHT-randint(500,600), self.assets))
 
         self.precipitation = PrecipitationManager()
         self.camerax = SCREEN_WIDTH * 5 / 4
@@ -89,6 +93,18 @@ class Game:
             self.precipitation.isSnow = True
             for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.WinterGround.rect.width)):
                 screen.blit(self.WinterGround.surface, (groundpos*self.WinterGround.rect.width - self.camerax, self.WinterGround.globaly - self.cameray, self.WinterGround.rect.width, self.WinterGround.rect.height))
+        
+        for cloud in self.clouds:
+            cloud.surface.set_alpha(165)
+            screen.blit(cloud.surface, (cloud.globalx - self.camerax, cloud.globaly-self.cameray, cloud.rect.width, cloud.rect.height))
+            cloud.globalx += (self.precipitation.wind) * randint(4,9)/20
+            if cloud.globalx > 1280+3200:
+                print("off right")
+                cloud.globalx = 1280-2900
+            elif cloud.globalx < 1280-3200:
+                print("off left")
+                cloud.globalx = 1280+2900
+
         
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
