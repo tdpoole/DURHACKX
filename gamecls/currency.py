@@ -18,8 +18,8 @@ class Currency:
     #             tree.cut_reward_given = True
 
     def draw(self, screen):
-        text = self.font.render(f"Currency: {self.amount}", True, (255, 215, 0))
-        screen.blit(text, (300, 30))
+        text = self.font.render(f"Currency: {self.amount}", True, (0, 0, 0))
+        screen.blit(text, (720, 30))
 
 
 

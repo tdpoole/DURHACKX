@@ -14,7 +14,7 @@ class WaterTank:
         self.sinceSelected = 0
 
     def update(self, player_input: Input):
-        if (200,12) < player_input.mouse_pos < (280,42):
+        if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
             if player_input.mouse_pressed[0] and self.sinceSelected > 30:
                 self.upgrade()
@@ -27,7 +27,7 @@ class WaterTank:
         self.stage += 1
 
     def show(self, screen):
-        screen.blit(self.surface, (200,12))
+        screen.blit(self.surface, self.rect)
         if self.mouseHovered:
             self.drawInfo(screen)
 
