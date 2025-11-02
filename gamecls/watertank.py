@@ -16,11 +16,11 @@ class WaterTank:
 
         self.currentWater = self.sizes[self.stage]
 
-    def update(self, player_input: Input, currency):
+    def update(self, player_input: Input, currency,game):
         if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
             if player_input.mouse_pressed[0] and self.sinceSelected > 30 and currency>=self.costs[self.stage+1]:
-                self.upgrade()
+                self.upgrade(game)
                 self.sinceSelected = 0
                 currency -= self.costs[self.stage]
         else:
@@ -28,8 +28,8 @@ class WaterTank:
         self.sinceSelected += 1
         return currency
 
-    def upgrade(self):
-        pygame.mixer.Channel(8).play('assets/Sounds/Upgrade.mp3')
+    def upgrade(self,game):
+        pygame.mixer.Channel(8).play(game.assets.moleBonkSound)
         self.stage += 1
 
     def show(self, screen):
