@@ -7,6 +7,7 @@ def import_image(imgpath, scale=1):
 class AssetManager:
     def __init__(self):
         self.seed = import_image('assets/Images/seed.png')
+        self.leaf = import_image('assets/Images/leaf.png')
         self.ground = import_image('assets/Images/ground.png')
         self.winterground = import_image('assets/Images/winterground.png')
 

@@ -2,6 +2,7 @@ import math
 from random import randint
 
 from gamecls.fallingseed import FallingSeed
+from gamecls.leaf import Leaf
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
 from gamecls.menubar import menuBar
@@ -17,18 +18,19 @@ class Game:
     def __init__(self, assets):
         self.trees = []
         self.seeds = []
+        self.leafs = []
         self.particles = []
         self.healthBars = []
         self.clouds = []
         self.backgroundDarkness = 1
 
         self.selected = ""
+        self.year = 1
         self.menuBar = menuBar(100, assets)
         self.waterbar = WaterBar(500,50,300,30)
         self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
-        self.year = 1
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
@@ -64,6 +66,9 @@ class Game:
 
         for seed in self.seeds:
             seed.update(self)
+        
+        for leaf in self.leafs:
+            leaf.update(self)
 
         for particle in self.particles:
             particle.update(self)
@@ -99,12 +104,9 @@ class Game:
             screen.blit(cloud.surface, (cloud.globalx - self.camerax, cloud.globaly-self.cameray, cloud.rect.width, cloud.rect.height))
             cloud.globalx += (self.precipitation.wind) * randint(4,9)/20
             if cloud.globalx > 1280+3200:
-                print("off right")
                 cloud.globalx = 1280-2900
             elif cloud.globalx < 1280-3200:
-                print("off left")
                 cloud.globalx = 1280+2900
-
         
         for tree in self.trees:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
@@ -112,13 +114,16 @@ class Game:
         for seed in self.seeds:
             screen.blit(seed.surface,(seed.globalx-self.camerax, seed.globaly-self.cameray, seed.rect.width, seed.rect.height))
 
+        for leaf in self.leafs:
+            screen.blit(leaf.surface,(leaf.globalx-self.camerax, leaf.globaly-self.cameray, leaf.rect.width, leaf.rect.height))
+
         for particle in self.particles:
             screen.blit(particle.surface, (particle.globalx-self.camerax, particle.globaly-self.cameray, particle.rect.width, particle.rect.height))
 
         for bar in self.healthBars:
             bar.draw(screen)
 
-        self.menuBar.show(screen)
+        self.menuBar.show(screen, self.year)
         self.currency.draw(screen)
         self.waterbar.draw(screen)
 
@@ -132,3 +137,6 @@ class Game:
     
     def createSeed(self, x, y):
         return FallingSeed(x, y, self.assets)
+    
+    def fallLeaf(self, x, y):
+        return Leaf(x, y, self.assets)
