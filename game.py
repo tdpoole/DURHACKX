@@ -56,6 +56,9 @@ class Game:
         self.cameray = 0
 
     def update(self, player_input: Input):
+        if randint(0,1000) == 0:
+            self.moles.append(Mole(randint(0,SCREEN_WIDTH*4-self.assets.goofmole.get_rect().width), self.assets))
+
         self.healthBars=[]
         self.precipitation.update(self)
         self.selected = self.menuBar.axe.update(player_input, self.selected)
