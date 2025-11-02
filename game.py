@@ -127,8 +127,8 @@ class Game:
             targetDarkness -= 0.2
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
-        for backgroundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.background.rect.width)):
-            screen.blit(self.background.surface, (backgroundpos*self.background.rect.width - self.camerax, self.background.globaly - self.cameray, self.background.rect.width, self.background.rect.height))
+        # for backgroundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.background.rect.width)):
+        #     screen.blit(self.background.surface, (backgroundpos*self.background.rect.width - self.camerax, self.background.globaly - self.cameray, self.background.rect.width, self.background.rect.height))
 
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
