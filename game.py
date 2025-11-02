@@ -59,13 +59,30 @@ class Game:
         self.waterbar.update(self)
 
         if self.year <= 10:
-            self.menuBar.gwValue = 80
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 100 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 80
         elif self.year <= 30:
-            self.menuBar.gwValue = 50
-        elif self.year <= 60:
-            self.menuBar.gwValue = 20
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 80 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 60
+        elif self.year <= 50:
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 60 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 40
+        elif self.year <= 70:
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 40 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 20
         else:
-            self.menuBar.gwValue = 0
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 20 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 0
 
         for tree in self.trees:
             tree.update(self, player_input)
