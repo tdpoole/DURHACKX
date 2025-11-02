@@ -3,6 +3,7 @@ from assetmanager import AssetManager
 from random import randint
 from worldobject import WorldObject
 from settings import *
+from gamecls.Zombiesapling import Zombiesapling
 
 class FallingSeed(WorldObject):
     def __init__(self, x, y, assets: AssetManager):
@@ -20,7 +21,10 @@ class FallingSeed(WorldObject):
                 return
             if self.globaly >= GROUND_Y_LEVEL:
                 game.seeds.remove(self)
-                game.trees.append(game.createTree(self.globalx, self.globaly))
+                if randint(0,10) == 0:
+                    game.zombieSaplings.append(Zombiesapling(self.globalx, self.globaly,game.assets))
+                else:
+                    game.trees.append(game.createTree(self.globalx, self.globaly))
 
         if self.attachedToTree:
             if randint(0,100)==0:

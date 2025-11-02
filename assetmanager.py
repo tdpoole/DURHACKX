@@ -4,6 +4,16 @@ from settings import PIXEL_SCALE_FACTOR
 def import_image(imgpath, scale=1):
     return pygame.transform.scale_by(pygame.image.load(imgpath), PIXEL_SCALE_FACTOR*scale)
 
+def inverted(img):
+    inv = pygame.Surface(img.get_size())
+
+    # fill it with white
+    inv.fill((255, 255, 255))
+
+    # Blit the logo to the screen but use "BLEND_RGBA_SUB"
+    inv.blit(img, (0, 0), None, pygame.BLEND_RGBA_SUB)
+    return inv
+
 class AssetManager:
     def __init__(self):
         self.seed = import_image('assets/Images/seed.png')
@@ -17,6 +27,7 @@ class AssetManager:
         self.treeGrowth3 = import_image('assets/Images/treephase4.png')
         self.treeGrowth4 = import_image('assets/Images/treephase4.png')
 
+
         self.rainParticle = import_image('assets/Images/rainParticle.png', 0.7)
         self.snowParticle = import_image('assets/Images/snowParticle.png', 0.35)
 
@@ -28,3 +39,6 @@ class AssetManager:
         self.axe = import_image('assets/Images/Axe.png', 0.3)
         self.wateringcan = import_image('assets/Images/wateringcan.png', 0.2)
         self.watertank = import_image('assets/Images/watertank.png', 0.3)
+
+        self.zombieSapling = inverted(self.treeGrowth0)
+        self.zombieSpore = inverted(self.leaf)
