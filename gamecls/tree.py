@@ -89,7 +89,7 @@ class Tree (WorldObject):
             self.mouseHovered = False
 
         if self.fullyGrown:
-            if randint(0,20000) == 0 and year >= 10:
+            if randint(0,20000) == 0 and year >= 5:
                 if game.precipitation.precipitating:
                     self.beingStruck = True
             if randint(0,30) == 0:
