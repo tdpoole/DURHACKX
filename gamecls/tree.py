@@ -38,6 +38,10 @@ class Tree (WorldObject):
 
 
     def update(self, game, input):
+        if self.isWatered and self.growthStage == 0:
+            self.isWatered = False
+            self.growthStage += 1
+            self.maxhealth = (600 + (300 * self.growthStage))
         if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
@@ -70,7 +74,7 @@ class Tree (WorldObject):
                         self.health = self.maxhealth
                     self.isWatered = True
                 elif game.selected == "Axe" and self.fullyGrown:
-                    self.health -= 1000
+                    self.health -= 100000
                     game.currency.amount+=100
         else:
             self.mouseHovered = False
