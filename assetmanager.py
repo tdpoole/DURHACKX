@@ -22,6 +22,7 @@ class AssetManager:
         self.fulltreeGrowth = import_image('assets/Images/treephase4.png')
 
         self.topbar = import_image('assets/Images/topbar.png', 0.5)
+        self.cloud = import_image('assets/Images/cloud.png')
 
         self.axe = import_image('assets/Images/Axe.png', 0.3)
         self.wateringcan = import_image('assets/Images/wateringcan.png', 0.2)
