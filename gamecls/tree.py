@@ -34,18 +34,27 @@ class Tree (WorldObject):
         self.growthSurfs.append(assets.treeGrowth3)
         self.fullygrownsurf = assets.fulltreeGrowth
 
+        self.lightningAnimation = [assets.l1,assets.l1,assets.l2,assets.l2,assets.l3,assets.l3,assets.l4,assets.l4,assets.l5,assets.l5]
+        self.beingStruck = False
+        self.lightningFrame = 0
+
         super().__init__(x, y, assets.treeGrowth0)
 
 
-    def update(self, game, input):
+    def update(self, game, input, year):
+        self.timeAlive += 1
+
+        self.lrect = game.assets.l1.get_rect(x=self.globalx - game.camerax - 10, y=self.globaly - game.cameray - 300)
+        if self.beingStruck:
+            self.lightningFrame += 1
+            if self.lightningFrame >= len(self.lightningAnimation):
+                game.trees.remove(self)
+
         self.health-=1
-        if self.isWatered and self.growthStage == 0:
-            self.isWatered = False
-            self.growthStage += 1
-            self.maxhealth = (600 + (300 * self.growthStage))
         if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
+                    pygame.mixer.Channel(3).play(self.assetref.growTreeSound)
                     self.isWatered = False
                     self.growthStage+=1
                     self.maxhealth = (600 + (300*self.growthStage))
@@ -69,18 +78,23 @@ class Tree (WorldObject):
 
             if input.mouse_pressed[0]:
                 if game.selected == "Can" and game.menuBar.watertank.currentWater>10:
+                    pygame.mixer.Channel(0).play(self.assetref.waterBucketSound)
                     game.menuBar.watertank.currentWater-=10
                     self.health += 100
                     if self.health > self.maxhealth:
                         self.health = self.maxhealth
                     self.isWatered = True
                 elif game.selected == "Axe" and self.fullyGrown:
+                    pygame.mixer.Channel(1).play(self.assetref.treeCutSound)
                     self.health -= 100000
-                    game.currency.amount+=100
+                    game.currency.amount+=100 + (1 + int(self.timeAlive / (20*60)))*50
         else:
             self.mouseHovered = False
 
         if self.fullyGrown:
+            if randint(0,20000) == 0 and year >= 5:
+                if game.precipitation.precipitating:
+                    self.beingStruck = True
             if randint(0,30) == 0:
                 game.leafs.append(game.fallLeaf(self.globalx + randint(25,self.surface.get_width()-25), self.globaly + randint(35,90)))
             if randint(0,500) == 0:

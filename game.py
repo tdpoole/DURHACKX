@@ -1,10 +1,12 @@
 import math
 from random import randint
+import pygame
 
 from gamecls.fallingseed import FallingSeed
 from gamecls.leaf import Leaf
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
+from gamecls.background import Background
 from gamecls.menubar import menuBar
 from gamecls.precipitation import PrecipitationManager
 from gamecls.tree import Tree
@@ -14,6 +16,7 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from gamecls.currency import Currency
 from gamecls.waterbar import WaterBar
 from gamecls.minigoal import MiniGoal
+from gamecls.mole import Mole
 
 class Game:
     def __init__(self, assets):
@@ -26,6 +29,7 @@ class Game:
         self.zombieSaplings = []
         self.zombieParticles = []
         self.backgroundDarkness = 1
+        self.moles = []
 
         self.selected = ""
         self.year = 1
@@ -36,6 +40,7 @@ class Game:
         self.waterbar = WaterBar(500,50,300,30)
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
+        self.background = Background(0, 0, assets)
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
@@ -51,11 +56,14 @@ class Game:
         self.cameray = 0
 
     def update(self, player_input: Input):
+        if randint(0,1000) == 0:
+            self.moles.append(Mole(randint(0,SCREEN_WIDTH*4-self.assets.goofmole.get_rect().width), self.assets))
+
         self.healthBars=[]
         self.precipitation.update(self)
         self.selected = self.menuBar.axe.update(player_input, self.selected)
         self.selected = self.menuBar.wateringcan.update(player_input, self.selected)
-        self.currency.amount = self.menuBar.watertank.update(player_input, self.currency.amount)
+        self.currency.amount = self.menuBar.watertank.update(player_input, self.currency.amount, self)
         self.waterbar.update(self)
 
         if self.year <= 10:
@@ -85,7 +93,7 @@ class Game:
                 self.menuBar.gwValue = 0
 
         for tree in self.trees:
-            tree.update(self, player_input)
+            tree.update(self, player_input, self.year)
             if tree.health<1:
                 self.trees.remove(tree)
         self.currency.update(self.trees)
@@ -98,6 +106,9 @@ class Game:
 
         for spore in self.zombieParticles:
             spore.update(self)
+
+        for mole in self.moles:
+            mole.update(self)
 
         for particle in self.particles:
             particle.update(self)
@@ -126,6 +137,9 @@ class Game:
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
         
+        for mole in self.moles:
+            screen.blit(mole.surface, (mole.globalx - self.camerax, mole.globaly-self.cameray, mole.rect.width, mole.rect.height))
+
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
             for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
@@ -145,7 +159,12 @@ class Game:
                 cloud.globalx = 1280+2900
         
         for tree in self.trees:
-            screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+            if not tree.beingStruck:
+                screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+            else:
+                if tree.lightningFrame<=5:
+                    screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+                screen.blit(tree.lightningAnimation[tree.lightningFrame],tree.lrect)
 
         for tree in self.zombieSaplings:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
@@ -167,7 +186,7 @@ class Game:
 
         self.menuBar.show(screen, self.year)
         self.currency.draw(screen)
-        self.waterbar.draw(screen)
+        self.waterbar.draw(screen, self)
         self.goal.draw(screen, len(self.trees))
 
         if self.selected == "Axe":

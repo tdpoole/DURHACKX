@@ -10,17 +10,17 @@ class WaterTank:
         self.rect = self.surface.get_rect(x=425,y=27)
         self.stage = stage
         self.sizes = [100,200,300,400,500]
-        self.costs = [0,500,1500,3000,10000]
+        self.costs = [0,200,500,900,1400]
         self.mouseHovered = False
         self.sinceSelected = 0
 
         self.currentWater = self.sizes[self.stage]
 
-    def update(self, player_input: Input, currency):
+    def update(self, player_input: Input, currency,game):
         if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
             if player_input.mouse_pressed[0] and self.sinceSelected > 30 and currency>=self.costs[self.stage+1]:
-                self.upgrade()
+                self.upgrade(game)
                 self.sinceSelected = 0
                 currency -= self.costs[self.stage]
         else:
@@ -28,7 +28,8 @@ class WaterTank:
         self.sinceSelected += 1
         return currency
 
-    def upgrade(self):
+    def upgrade(self,game):
+        pygame.mixer.Channel(8).play(game.assets.moleBonkSound)
         self.stage += 1
 
     def show(self, screen):

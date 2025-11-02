@@ -47,6 +47,7 @@ class PrecipitationManager:
         else:
             if randint(0,600-game.menuBar.gwValue*5)==0:
                 self.precipitating = True
+                pygame.mixer.Channel(2).play(game.assets.rainSound)
 
 
         # Update particles

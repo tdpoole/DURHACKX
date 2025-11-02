@@ -1,3 +1,5 @@
+from random import randint
+
 from assetmanager import AssetManager
 from worldobject import WorldObject
 import pygame
@@ -9,6 +11,8 @@ class ZombieParticle(WorldObject):
         super().__init__(x, y, assets.zombieSpore)
 
     def update(self, game):
+        if randint(0,1000) == 0:
+            game.zombieParticles.remove(self)
         if 0<self.globalx<SCREEN_WIDTH*4:
             self.globalx+=game.precipitation.wind/10
         else:

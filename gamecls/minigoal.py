@@ -8,20 +8,22 @@ class MiniGoal:
         self.goal = self.getGoal()
 
     def getGoal(self):
-        # find better way to set goal
-        return randint(5,8)
+        if self.goalYear == 10:
+            return randint(2,4)
+        else:
+            return randint(5,8)
 
     def update(self, year, trees):
         self.year = year
         if self.year == self.goalYear:
-            self.goalYear += 10
-            self.goal = self.getGoal()
             if self.goal > len(trees):
                 return []
+            self.goalYear += 10
+            self.goal = self.getGoal()
         return trees
     
     def draw(self, screen, numTrees):
         font = pygame.font.Font('freesansbold.ttf', 32)
         text1 = font.render(f"GOAL : ({numTrees}/{self.goal}) trees needed before {self.goalYear}", True, (0,0,0), (255,255,255))
-        screen.blit(text1, (1280/2 - 300, 120))
+        screen.blit(text1, (1280/2 - 300, 140))
 
