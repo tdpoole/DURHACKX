@@ -19,7 +19,6 @@ class WaterTank:
     def update(self, player_input: Input, currency):
         if self.rect.collidepoint(player_input.mouse_pos):
             self.mouseHovered = True
-            print(currency)
             if player_input.mouse_pressed[0] and self.sinceSelected > 30 and currency>=self.costs[self.stage+1]:
                 self.upgrade()
                 self.sinceSelected = 0
