@@ -12,6 +12,7 @@ class FallingSeed(WorldObject):
         super().__init__(x, y, assets.seed)
 
     def update(self, game):
+        self.rect = self.surface.get_rect(x=self.globalx - game.camerax, y=self.globaly - game.cameray)
         if not self.attachedToTree:
             self.globaly += 2
             if 0<self.globalx<SCREEN_WIDTH*4:
@@ -29,3 +30,8 @@ class FallingSeed(WorldObject):
         if self.attachedToTree:
             if randint(0,100)==0:
                 self.attachedToTree = False
+
+        for mole in game.moles:
+            if self.rect.colliderect(mole.rect):
+                print("nom")
+                game.seeds.remove(self)

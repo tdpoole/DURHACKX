@@ -1,5 +1,6 @@
 import math
 from random import randint
+import pygame
 
 from gamecls.fallingseed import FallingSeed
 from gamecls.leaf import Leaf
@@ -14,6 +15,7 @@ from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from gamecls.currency import Currency
 from gamecls.waterbar import WaterBar
 from gamecls.minigoal import MiniGoal
+from gamecls.mole import Mole
 
 class Game:
     def __init__(self, assets):
@@ -26,6 +28,7 @@ class Game:
         self.zombieSaplings = []
         self.zombieParticles = []
         self.backgroundDarkness = 1
+        self.moles = [Mole(SCREEN_WIDTH*7/4,assets)]
 
         self.selected = ""
         self.year = 1
@@ -99,6 +102,9 @@ class Game:
         for spore in self.zombieParticles:
             spore.update(self)
 
+        for mole in self.moles:
+            mole.update(self)
+
         for particle in self.particles:
             particle.update(self)
             if particle.killme:
@@ -126,6 +132,9 @@ class Game:
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
         
+        for mole in self.moles:
+            screen.blit(mole.surface, (mole.globalx - self.camerax, mole.globaly-self.cameray, mole.rect.width, mole.rect.height))
+
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
             for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
