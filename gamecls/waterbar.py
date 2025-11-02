@@ -6,7 +6,7 @@ class WaterBar:
         self.bgRect = pygame.Rect(x, y, width, height)
         self.fgRect = pygame.Rect(x, y, width, height)
     def update(self, game):
-        fillamount = game.menuBar.watertank./game.menuBar.watertank.sizes[game.menuBar.watertank.stage]
+        fillamount = game.menuBar.watertank.currentWater/game.menuBar.watertank.sizes[game.menuBar.watertank.stage]
         self.fgRect.width = self.bgRect.width*fillamount
 
     def draw(self, screen):
