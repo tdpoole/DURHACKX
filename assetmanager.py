@@ -51,3 +51,4 @@ class AssetManager:
         self.zombieSpore = inverted(self.leaf)
         
         self.goofmole = import_image('assets/Images/mole.png',0.6)
+        self.bonkmole = import_image('assets/Images/bonkedmole.png',0.6)
