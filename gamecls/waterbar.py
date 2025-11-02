@@ -9,7 +9,7 @@ class WaterBar:
         fillamount = game.menuBar.watertank.currentWater/game.menuBar.watertank.sizes[game.menuBar.watertank.stage]
         self.fgRect.width = self.bgRect.width*fillamount
         if game.precipitation.precipitating:
-            game.menuBar.watertank.currentWater+=game.precipitation.weight/100
+            game.menuBar.watertank.currentWater+=game.precipitation.weight/20
         if game.menuBar.watertank.currentWater>game.menuBar.watertank.sizes[game.menuBar.watertank.stage]:
             game.menuBar.watertank.currentWater=game.menuBar.watertank.sizes[game.menuBar.watertank.stage]
 
