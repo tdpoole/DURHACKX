@@ -42,6 +42,8 @@ class Tree (WorldObject):
 
 
     def update(self, game, input, year):
+        self.timeAlive += 1
+
         self.lrect = game.assets.l1.get_rect(x=self.globalx - game.camerax - 10, y=self.globaly - game.cameray - 300)
         if self.beingStruck:
             self.lightningFrame += 1
@@ -49,10 +51,6 @@ class Tree (WorldObject):
                 game.trees.remove(self)
 
         self.health-=1
-        if self.isWatered and self.growthStage == 0:
-            self.isWatered = False
-            self.growthStage += 1
-            self.maxhealth = (600 + (300 * self.growthStage))
         if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
@@ -86,7 +84,7 @@ class Tree (WorldObject):
                     self.isWatered = True
                 elif game.selected == "Axe" and self.fullyGrown:
                     self.health -= 100000
-                    game.currency.amount+=100
+                    game.currency.amount+=100 + (1 + int(self.timeAlive / (20*60)))*50
         else:
             self.mouseHovered = False
 

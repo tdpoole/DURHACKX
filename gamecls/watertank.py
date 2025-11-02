@@ -10,7 +10,7 @@ class WaterTank:
         self.rect = self.surface.get_rect(x=425,y=27)
         self.stage = stage
         self.sizes = [100,200,300,400,500]
-        self.costs = [0,500,1500,3000,10000]
+        self.costs = [0,200,500,900,1400]
         self.mouseHovered = False
         self.sinceSelected = 0
 
