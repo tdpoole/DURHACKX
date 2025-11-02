@@ -29,7 +29,7 @@ class Game:
         self.zombieSaplings = []
         self.zombieParticles = []
         self.backgroundDarkness = 1
-        self.moles = [Mole(SCREEN_WIDTH*7/4,assets)]
+        self.moles = []
 
         self.selected = ""
         self.year = 1
