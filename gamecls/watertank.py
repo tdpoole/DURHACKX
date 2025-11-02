@@ -9,8 +9,8 @@ class WaterTank:
         self.surface = assets.watertank
         self.size = size
         self.mouseHovered = False
-        self.rect = self.surface.get_rect(x=200,y=12)
-        self.infoBaseRect = pygame.rect.Rect(200, 12, 100, 50)
+        self.rect = self.surface.get_rect(x=450,y=30)
+        self.infoBaseRect = pygame.rect.Rect(450, 30, 100, 50)
 
     def update(self, player_input: Input):
         if self.rect.collidepoint(player_input.mouse_pos):

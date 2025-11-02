@@ -8,7 +8,7 @@ class WateringCan:
     def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.surface = assets.wateringcan
-        self.rect = self.surface.get_rect(x=110,y=12)
+        self.rect = self.surface.get_rect(x=325,y=24)
         self.sinceSelected = 0
 
     def update(self, player_input: Input, selected):

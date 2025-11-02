@@ -8,7 +8,7 @@ class Axe:
     def __init__(self, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.surface = assets.axe
-        self.rect = self.surface.get_rect(x=20,y=12)
+        self.rect = self.surface.get_rect(x=200,y=24)
         self.sinceSelected = 0
 
     def update(self, player_input: Input, selected):
