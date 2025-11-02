@@ -11,7 +11,7 @@ class menuBar():
         self.gwValue = gwValue
         self.axe = Axe(assets)
         self.wateringcan = WateringCan(assets)
-        self.watertank = WaterTank(assets, 100)
+        self.watertank = WaterTank(assets, 0)
         self.surface = assets.topbar
 
     def show(self, screen):
