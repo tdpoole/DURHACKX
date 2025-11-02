@@ -21,7 +21,7 @@ class FallingSeed(WorldObject):
                 return
             if self.globaly >= GROUND_Y_LEVEL:
                 game.seeds.remove(self)
-                if randint(0,10) == 0:
+                if randint(0,20) == 0:
                     game.zombieSaplings.append(Zombiesapling(self.globalx, self.globaly,game.assets))
                 else:
                     game.trees.append(game.createTree(self.globalx, self.globaly))
