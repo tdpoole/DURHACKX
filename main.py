@@ -15,10 +15,10 @@ def ending(screen, player_input, years):
   #  text1 = font.render("GAME END", True, (0,0,0))
   #  screen.blit(text1, (0,0))
 
-   text2 = font.render(f"You lasted {years} years", True, (255, 255, 255))
+   text2 = font.render(f"You lasted {years} years...", True, (255, 255, 255))
    screen.blit(text2, (0, 560))
 
-   text3 = font.render("Click me to end", True, (0, 0, 0), (255,0,0))
+   text3 = font.render("Click me to exit", True, (0, 0, 0), (255,0,0))
    screen.blit(text3, (0, 620))
    if player_input.mouse_pressed[0] and text3.get_rect(x=0,y=620).collidepoint(player_input.mouse_pos):
         return "quit"

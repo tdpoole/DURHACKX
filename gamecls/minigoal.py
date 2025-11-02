@@ -16,10 +16,10 @@ class MiniGoal:
     def update(self, year, trees):
         self.year = year
         if self.year == self.goalYear:
-            self.goalYear += 10
-            self.goal = self.getGoal()
             if self.goal > len(trees):
                 return []
+            self.goalYear += 10
+            self.goal = self.getGoal()
         return trees
     
     def draw(self, screen, numTrees):

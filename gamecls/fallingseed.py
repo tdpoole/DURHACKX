@@ -21,7 +21,8 @@ class FallingSeed(WorldObject):
                 game.seeds.remove(self)
                 return
             if self.globaly >= GROUND_Y_LEVEL:
-                game.seeds.remove(self)
+                if self in game.seeds:
+                    game.seeds.remove(self)
                 if randint(0,20) == 0:
                     pygame.mixer.Channel(4).play(game.assets.zombieSpawnSound)
                     game.zombieSaplings.append(Zombiesapling(self.globalx, self.globaly,game.assets))
@@ -37,4 +38,5 @@ class FallingSeed(WorldObject):
             if self.rect.colliderect(mole.rect):
                 pygame.mixer.Channel(9).play(game.assets.moleEatSound)
                 print("nom")
-                game.seeds.remove(self)
+                if self in game.seeds:
+                    game.seeds.remove(self)
