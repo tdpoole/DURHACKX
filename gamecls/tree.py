@@ -38,6 +38,7 @@ class Tree (WorldObject):
 
 
     def update(self, game, input):
+        self.health-=1
         if self.isWatered and self.growthStage == 0:
             self.isWatered = False
             self.growthStage += 1
