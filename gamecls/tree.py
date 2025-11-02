@@ -59,7 +59,7 @@ class Tree (WorldObject):
         self.globalx = self.xpos - self.surface.get_width()
 
         if game.precipitation.precipitating:
-            self.health += game.precipitation.weight/1
+            self.health += game.precipitation.weight/5
             if self.health > self.maxhealth:
                 self.health = self.maxhealth
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
