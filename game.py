@@ -13,6 +13,7 @@ from plrinput import Input
 from settings import SCREEN_WIDTH, SCREEN_HEIGHT, GROUND_Y_LEVEL
 from gamecls.currency import Currency
 from gamecls.waterbar import WaterBar
+from gamecls.minigoal import MiniGoal
 
 class Game:
     def __init__(self, assets):
@@ -29,6 +30,7 @@ class Game:
         self.selected = ""
         self.year = 1
         self.season = 1
+        self.goal = MiniGoal()
 
         self.menuBar = menuBar(100, assets)
         self.waterbar = WaterBar(500,50,300,30)
@@ -57,13 +59,30 @@ class Game:
         self.waterbar.update(self)
 
         if self.year <= 10:
-            self.menuBar.gwValue = 80
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 100 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 80
         elif self.year <= 30:
-            self.menuBar.gwValue = 50
-        elif self.year <= 60:
-            self.menuBar.gwValue = 20
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 80 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 60
+        elif self.year <= 50:
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 60 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 40
+        elif self.year <= 70:
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 40 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 20
         else:
-            self.menuBar.gwValue = 0
+            if len(self.trees)<=10:
+                self.menuBar.gwValue = 20 - len(self.trees)*2
+            else:
+                self.menuBar.gwValue = 0
 
         for tree in self.trees:
             tree.update(self, player_input)
@@ -94,6 +113,8 @@ class Game:
             self.camerax -= 10
         if player_input.mouse_pos[0] > SCREEN_WIDTH-100 and self.camerax < SCREEN_WIDTH*2.5 and player_input.mouse_pos[1]>80:
             self.camerax += 10
+
+        self.trees = self.goal.update(self.year, self.trees)
 
     def draw(self, screen, player_input):
         if self.precipitation.precipitating:
@@ -152,6 +173,7 @@ class Game:
         self.menuBar.show(screen, self.year)
         self.currency.draw(screen)
         self.waterbar.draw(screen)
+        self.goal.draw(screen, len(self.trees))
 
         if self.selected == "Axe":
             screen.blit(self.menuBar.axe.surface, (player_input.mouse_pos[0],player_input.mouse_pos[1]))
