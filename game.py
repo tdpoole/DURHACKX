@@ -5,6 +5,7 @@ from gamecls.fallingseed import FallingSeed
 from gamecls.leaf import Leaf
 from gamecls.ground import Ground
 from gamecls.ground import WinterGround
+from gamecls.background import Background
 from gamecls.menubar import menuBar
 from gamecls.precipitation import PrecipitationManager
 from gamecls.tree import Tree
@@ -36,6 +37,7 @@ class Game:
         self.waterbar = WaterBar(500,50,300,30)
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
+        self.background = Background(0, 0, assets)
 
         self.assets = assets
         self.trees.append(Tree(SCREEN_WIDTH*7/4,SCREEN_HEIGHT-140,self.assets))
@@ -125,7 +127,9 @@ class Game:
             targetDarkness -= 0.2
         self.backgroundDarkness+=(targetDarkness-self.backgroundDarkness)*0.01
         screen.fill((int(100*self.backgroundDarkness),int(150*self.backgroundDarkness),int(220*self.backgroundDarkness)))
-        
+        for backgroundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.background.rect.width)):
+            screen.blit(self.background.surface, (backgroundpos*self.background.rect.width - self.camerax, self.background.globaly - self.cameray, self.background.rect.width, self.background.rect.height))
+
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
             for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
