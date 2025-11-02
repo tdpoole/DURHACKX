@@ -8,8 +8,10 @@ class MiniGoal:
         self.goal = self.getGoal()
 
     def getGoal(self):
-        # find better way to set goal
-        return randint(5,8)
+        if self.goalYear == 10:
+            return randint(2,4)
+        else:
+            return randint(5,8)
 
     def update(self, year, trees):
         self.year = year

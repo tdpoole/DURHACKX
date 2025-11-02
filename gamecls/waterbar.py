@@ -7,6 +7,7 @@ class WaterBar:
         self.fgRect = pygame.Rect(x, y, width, height)
 
         self.font = pygame.font.SysFont('Helvetica.ttf', 32)
+        
     def update(self, game):
         fillamount = game.menuBar.watertank.currentWater/game.menuBar.watertank.sizes[game.menuBar.watertank.stage]
         self.fgRect.width = self.bgRect.width*fillamount

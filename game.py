@@ -93,7 +93,7 @@ class Game:
                 self.menuBar.gwValue = 0
 
         for tree in self.trees:
-            tree.update(self, player_input)
+            tree.update(self, player_input, self.year)
             if tree.health<1:
                 self.trees.remove(tree)
         self.currency.update(self.trees)

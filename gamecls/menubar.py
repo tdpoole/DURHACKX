@@ -19,12 +19,6 @@ class menuBar():
         # pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
         screen.blit(self.surface, (0, 0, 64, 10))
 
-        # adding global warning variable
-        #font = pygame.font.Font('freesansbold.ttf', 32)
-        #text = font.render('Global Warming ' + str(self.gwValue), True, pygame.Color(0,0,0), pygame.Color(255,255,255))
-        #textRect = text.get_rect(x=SCREEN_WIDTH-300,y=24)
-        #screen.blit(text, textRect)
-
         font = pygame.font.Font('freesansbold.ttf', 23)
         text = font.render(f"Year: {year}", True, (0, 0, 0))
         screen.blit(text, (900, 50))

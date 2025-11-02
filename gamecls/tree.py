@@ -41,7 +41,7 @@ class Tree (WorldObject):
         super().__init__(x, y, assets.treeGrowth0)
 
 
-    def update(self, game, input):
+    def update(self, game, input, year):
         self.lrect = game.assets.l1.get_rect(x=self.globalx - game.camerax - 10, y=self.globaly - game.cameray - 300)
         if self.beingStruck:
             self.lightningFrame += 1
@@ -91,7 +91,7 @@ class Tree (WorldObject):
             self.mouseHovered = False
 
         if self.fullyGrown:
-            if randint(0,10000) == 0:
+            if randint(0,20000) == 0 and year >= 10:
                 if game.precipitation.precipitating:
                     self.beingStruck = True
             if randint(0,30) == 0:

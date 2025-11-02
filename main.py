@@ -55,17 +55,19 @@ def main():
 
         player_input.update()
 
+        seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
+
         if state == "game":
             game.update(player_input)
 
             game.draw(window, player_input)
+
+            game.season = 1 + math.floor(seconds_passed / 10) # 60
+            game.year = 1 + math.floor(seconds_passed / 20)
+        
         pygame.display.flip()
 
         clock.tick(FRAMERATE)
-
-        seconds_passed = (pygame.time.get_ticks() - start_ticks) / 1000
-        game.season = 1 + math.floor(seconds_passed / 10) # 60
-        game.year = 1 + math.floor(seconds_passed / 20)
         if len(game.trees) == 0:
             state = "end"
 
