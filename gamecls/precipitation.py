@@ -47,11 +47,11 @@ class PrecipitationManager:
         else:
             if randint(0,600-game.menuBar.gwValue*5)==0:
                 self.precipitating = True
+                pygame.mixer.Channel(2).play(game.assets.rainSound)
 
 
         # Update particles
         if self.precipitating:
-            pygame.mixer.Channel(2).play(game.assets.rainSound)
             for i in range(self.weight):
                 if self.isSnow:
                     game.particles.append(PrecipitationParticle(randint(-SCREEN_WIDTH,SCREEN_WIDTH*2)+game.camerax,0,game.assets.snowParticle,self.precipitationWeight))
