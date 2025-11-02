@@ -137,9 +137,6 @@ class Game:
         for mole in self.moles:
             screen.blit(mole.surface, (mole.globalx - self.camerax, mole.globaly-self.cameray, mole.rect.width, mole.rect.height))
 
-        for backgroundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.background.rect.width)):
-            screen.blit(self.background.surface, (backgroundpos*self.background.rect.width - self.camerax, self.background.globaly - self.cameray, self.background.rect.width, self.background.rect.height))
-
         if self.season % 2 == 1: # Summer
             self.precipitation.isSnow = False
             for groundpos in range(0, math.ceil(SCREEN_WIDTH*4/self.SummerGround.rect.width)):
