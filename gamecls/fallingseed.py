@@ -37,6 +37,5 @@ class FallingSeed(WorldObject):
         for mole in game.moles:
             if self.rect.colliderect(mole.rect):
                 pygame.mixer.Channel(9).play(game.assets.moleEatSound)
-                print("nom")
                 if self in game.seeds:
                     game.seeds.remove(self)
