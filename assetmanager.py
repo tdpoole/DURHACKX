@@ -52,3 +52,16 @@ class AssetManager:
         
         self.goofmole = import_image('assets/Images/mole.png',0.6)
         self.bonkmole = import_image('assets/Images/bonkedmole.png',0.6)
+
+
+        self.treeCutSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.gameEndSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.growTreeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.moleBonkSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.moleEatSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.mouseEmergeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.plantingSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.rainSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.upgradeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.waterBucketSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.zombieSpawnSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
