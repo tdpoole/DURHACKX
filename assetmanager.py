@@ -20,6 +20,7 @@ class AssetManager:
         self.leaf = import_image('assets/Images/leaf.png')
         self.ground = import_image('assets/Images/ground.png')
         self.winterground = import_image('assets/Images/winterground.png')
+        self.background = import_image('assets/Images/background.png',0.25)
 
         self.treeGrowth0 = import_image('assets/Images/treephase1.png')
         self.treeGrowth1 = import_image('assets/Images/treephase2.png')

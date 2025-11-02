@@ -23,5 +23,5 @@ class MiniGoal:
     def draw(self, screen, numTrees):
         font = pygame.font.Font('freesansbold.ttf', 32)
         text1 = font.render(f"GOAL : ({numTrees}/{self.goal}) trees needed before {self.goalYear}", True, (0,0,0), (255,255,255))
-        screen.blit(text1, (1280/2 - 300, 120))
+        screen.blit(text1, (1280/2 - 300, 140))
 
