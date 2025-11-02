@@ -124,7 +124,12 @@ class Game:
                 cloud.globalx = 1280+2900
         
         for tree in self.trees:
-            screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+            if not tree.beingStruck:
+                screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+            else:
+                if tree.lightningFrame<=5:
+                    screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))
+                screen.blit(tree.lightningAnimation[tree.lightningFrame],tree.lrect)
 
         for tree in self.zombieSaplings:
             screen.blit(tree.surface, (tree.globalx - self.camerax, tree.globaly-self.cameray, tree.rect.width, tree.rect.height))

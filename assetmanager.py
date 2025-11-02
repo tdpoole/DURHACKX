@@ -27,6 +27,12 @@ class AssetManager:
         self.treeGrowth3 = import_image('assets/Images/treephase4.png')
         self.treeGrowth4 = import_image('assets/Images/treephase4.png')
 
+        self.l1 = import_image('assets/Images/l/l1.png', 0.3)
+        self.l2 = import_image('assets/Images/l/l2.png', 0.3)
+        self.l3 = import_image('assets/Images/l/l3.png', 0.3)
+        self.l4 = import_image('assets/Images/l/l4.png', 0.3)
+        self.l5 = import_image('assets/Images/l/l5.png', 0.3)
+
 
         self.rainParticle = import_image('assets/Images/rainParticle.png', 0.7)
         self.snowParticle = import_image('assets/Images/snowParticle.png', 0.35)

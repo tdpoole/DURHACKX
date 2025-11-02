@@ -34,10 +34,20 @@ class Tree (WorldObject):
         self.growthSurfs.append(assets.treeGrowth3)
         self.fullygrownsurf = assets.fulltreeGrowth
 
+        self.lightningAnimation = [assets.l1,assets.l1,assets.l2,assets.l2,assets.l3,assets.l3,assets.l4,assets.l4,assets.l5,assets.l5]
+        self.beingStruck = False
+        self.lightningFrame = 0
+
         super().__init__(x, y, assets.treeGrowth0)
 
 
     def update(self, game, input):
+        self.lrect = game.assets.l1.get_rect(x=self.globalx - game.camerax - 10, y=self.globaly - game.cameray - 300)
+        if self.beingStruck:
+            self.lightningFrame += 1
+            if self.lightningFrame >= len(self.lightningAnimation):
+                game.trees.remove(self)
+
         self.health-=1
         if self.isWatered and self.growthStage == 0:
             self.isWatered = False
@@ -81,6 +91,9 @@ class Tree (WorldObject):
             self.mouseHovered = False
 
         if self.fullyGrown:
+            if randint(0,10000) == 0:
+                if game.precipitation.precipitating:
+                    self.beingStruck = True
             if randint(0,30) == 0:
                 game.leafs.append(game.fallLeaf(self.globalx + randint(25,self.surface.get_width()-25), self.globaly + randint(35,90)))
             if randint(0,500) == 0:
