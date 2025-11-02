@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 
 class MiniGoal:
     def __init__(self):
@@ -8,15 +9,15 @@ class MiniGoal:
 
     def getGoal(self):
         # find better way to set goal
-        return self.goalYear
+        return randint(5,8)
 
     def update(self, year, trees):
         self.year = year
         if self.year == self.goalYear:
+            self.goalYear += 10
+            self.goal = self.getGoal()
             if self.goal > len(trees):
                 return []
-        self.goalYear = (self.year // 10)*10 + 10
-        self.goal = self.getGoal()
         return trees
     
     def draw(self, screen, numTrees):
