@@ -29,6 +29,7 @@ class WaterTank:
         return currency
 
     def upgrade(self):
+        pygame.mixer.Sound('assets/Sounds/Upgrade.mp3').play()
         self.stage += 1
 
     def show(self, screen):

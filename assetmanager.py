@@ -59,7 +59,7 @@ class AssetManager:
         self.growTreeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
         self.moleBonkSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
         self.moleEatSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
-        self.mouseEmergeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
+        self.moleEmergeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
         self.plantingSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
         self.rainSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')
         self.upgradeSound = pygame.mixer.Sound('assets/sounds/Cut tree.m4a')

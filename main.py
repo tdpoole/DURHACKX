@@ -69,6 +69,7 @@ def main():
 
         clock.tick(FRAMERATE)
         if len(game.trees) == 0:
+            pygame.mixer.Sound.play(game.assets.gameEndSound)
             state = "end"
 
         if state == "end":

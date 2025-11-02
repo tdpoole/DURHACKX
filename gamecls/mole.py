@@ -9,7 +9,7 @@ class Mole(WorldObject):
     def __init__(self, x, assets: assetmanager.AssetManager):
         self.assetref = assets
         self.retracting = False
-
+        pygame.mixer.Sound.play(assets.moleEmergeSound)
         super().__init__(x, SCREEN_HEIGHT, assets.goofmole)
 
     def update(self, game):
@@ -24,5 +24,6 @@ class Mole(WorldObject):
             game.moles.remove(self)
 
         if self.rect.collidepoint(pygame.mouse.get_pos()) and game.selected == "Axe" and pygame.mouse.get_pressed()[0]:
+            pygame.mixer.Sound.play(game.assets.moleBonkSound)
             self.retracting=True
             self.surface = self.assetref.bonkmole

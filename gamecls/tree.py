@@ -54,6 +54,7 @@ class Tree (WorldObject):
         if self.health >= self.maxhealth*0.9:
             if not self.fullyGrown:
                 if randint(0,500) == 0:
+                    pygame.mixer.Sound.play(self.assetref.treeCutSound)
                     self.isWatered = False
                     self.growthStage+=1
                     self.maxhealth = (600 + (300*self.growthStage))
@@ -77,12 +78,14 @@ class Tree (WorldObject):
 
             if input.mouse_pressed[0]:
                 if game.selected == "Can" and game.menuBar.watertank.currentWater>10:
+                    pygame.mixer.Sound.play(self.assetref.waterBucketSound)
                     game.menuBar.watertank.currentWater-=10
                     self.health += 100
                     if self.health > self.maxhealth:
                         self.health = self.maxhealth
                     self.isWatered = True
                 elif game.selected == "Axe" and self.fullyGrown:
+                    pygame.mixer.Sound.play(self.assetref.treeCutSound)
                     self.health -= 100000
                     game.currency.amount+=100 + (1 + int(self.timeAlive / (20*60)))*50
         else:
