@@ -28,9 +28,10 @@ class Game:
 
         self.selected = ""
         self.year = 1
+        self.season = 1
+
         self.menuBar = menuBar(100, assets)
         self.waterbar = WaterBar(500,50,300,30)
-        self.season = 1
         self.SummerGround = Ground(10, GROUND_Y_LEVEL, assets)
         self.WinterGround = WinterGround(10, GROUND_Y_LEVEL, assets)
 
@@ -55,12 +56,12 @@ class Game:
         self.currency.amount = self.menuBar.watertank.update(player_input, self.currency.amount)
         self.waterbar.update(self)
 
-        if len(self.trees) <= 5:
-            self.menuBar.gwValue = 100 - (len(self.trees)-1)*5
-        elif len(self.trees) <= 10:
-            self.menuBar.gwValue = 100 - 25 - (len(self.trees)-6)*2
-        elif len(self.trees) <= 20:
-            self.menuBar.gwValue = 100 - 35 - (len(self.trees)-11)*1
+        if self.year <= 10:
+            self.menuBar.gwValue = 80
+        elif self.year <= 30:
+            self.menuBar.gwValue = 50
+        elif self.year <= 60:
+            self.menuBar.gwValue = 20
         else:
             self.menuBar.gwValue = 0
 
