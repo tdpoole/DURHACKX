@@ -56,7 +56,7 @@ class Tree (WorldObject):
 
         self.health-=1
         if game.precipitation.precipitating:
-            self.health += game.precipitation.weight/10
+            self.health += game.precipitation.weight/1
             if self.health > self.maxhealth:
                 self.health = self.maxhealth
         if self.rect.collidepoint(input.mouse_pos[0],input.mouse_pos[1]):
@@ -77,8 +77,10 @@ class Tree (WorldObject):
             self.mouseHovered = False
 
         if self.fullyGrown:
+            if randint(0,30) == 0:
+                game.leafs.append(game.fallLeaf(self.globalx + randint(25,self.surface.get_width()-25), self.globaly + randint(35,90)))
             if randint(0,500) == 0:
-                game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
+                game.seeds.append(game.createSeed(self.globalx + randint(50,90),self.globaly + randint(0,70)))
 
         # Life drains quicker if close to other trees
         for othertree in game.trees:
@@ -86,4 +88,4 @@ class Tree (WorldObject):
             xpos = othertree.globalx
             horizDiff = self.globalx - xpos
             if horizDiff < 0: horizDiff = -horizDiff
-            self.health -= 200/horizDiff
+            self.health -= 100/horizDiff
