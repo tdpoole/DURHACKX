@@ -11,7 +11,7 @@ class menuBar():
         self.gwValue = gwValue
         self.axe = Axe(assets)
         self.wateringcan = WateringCan(assets)
-        self.watertank = WaterTank(assets, 100)
+        self.watertank = WaterTank(assets, 0)
 
     def show(self, screen):
         pygame.draw.rect(screen, pygame.Color(0,0,0), rect=(0,0,SCREEN_WIDTH,80))
