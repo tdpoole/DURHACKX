@@ -76,8 +76,10 @@ class Tree (WorldObject):
             self.mouseHovered = False
 
         if self.fullyGrown:
+            if randint(0,30) == 0:
+                game.leafs.append(game.fallLeaf(self.globalx + randint(25,self.surface.get_width()-25), self.globaly + randint(35,90)))
             if randint(0,500) == 0:
-                game.seeds.append(game.createSeed(self.globalx+randint(50,90),self.globaly+randint(0,70)))
+                game.seeds.append(game.createSeed(self.globalx + randint(50,90),self.globaly + randint(0,70)))
 
         # Life drains quicker if close to other trees
         for othertree in game.trees:
